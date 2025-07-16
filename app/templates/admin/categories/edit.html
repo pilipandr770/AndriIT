@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block title %}Редактирование категории - Админ-панель{% endblock %}
+
+{% block content %}
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('admin_panel.index') }}">Админ-панель</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('admin_panel.categories') }}">Категории</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Редактирование категории</li>
+        </ol>
+    </nav>
+    
+    <h1 class="mb-4">Редактирование категории: {{ category.name }}</h1>
+    
+    <div class="card">
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                <ul class="nav nav-tabs mb-4" id="languageTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button" role="tab" aria-controls="general" aria-selected="true">
+                            Основное
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="uk-tab" data-bs-toggle="tab" data-bs-target="#uk" type="button" role="tab" aria-controls="uk" aria-selected="false">
+                            <img src="{{ url_for('static', filename='img/flags/uk.svg') }}" alt="Українська" class="language-flag" width="20"> Українська
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="de-tab" data-bs-toggle="tab" data-bs-target="#de" type="button" role="tab" aria-controls="de" aria-selected="false">
+                            <img src="{{ url_for('static', filename='img/flags/de.svg') }}" alt="Deutsch" class="language-flag" width="20"> Deutsch
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="en-tab" data-bs-toggle="tab" data-bs-target="#en" type="button" role="tab" aria-controls="en" aria-selected="false">
+                            <img src="{{ url_for('static', filename='img/flags/en.svg') }}" alt="English" class="language-flag" width="20"> English
+                        </button>
+                    </li>
+                </ul>
+                
+                <div class="tab-content" id="languageTabsContent">
+                    <!-- Основная вкладка -->
+                    <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Название категории *</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ category.name }}" required>
+                            <div class="form-text">Основное название категории (используется по умолчанию).</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Описание</label>
+                            <textarea class="form-control" id="description" name="description" rows="3">{{ category.description }}</textarea>
+                            <div class="form-text">Основное описание категории (используется по умолчанию).</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Изображение</label>
+                            {% if category.image %}
+                                <div class="mb-2">
+                                    <img src="{{ url_for('static', filename=category.image) }}" alt="{{ category.name }}" class="img-thumbnail" style="max-height: 200px;">
+                                </div>
+                            {% endif %}
+                            <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                            <div class="form-text">Рекомендуемый размер: 800x600 пикселей. Оставьте пустым, чтобы сохранить текущее изображение.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Украинская вкладка -->
+                    <div class="tab-pane fade" id="uk" role="tabpanel" aria-labelledby="uk-tab">
+                        <div class="mb-3">
+                            <label for="name_uk" class="form-label">Название (Українська)</label>
+                            <input type="text" class="form-control" id="name_uk" name="name_uk" value="{{ category.name_uk }}">
+                            <div class="form-text">Название категории на украинском языке.</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="description_uk" class="form-label">Описание (Українська)</label>
+                            <textarea class="form-control" id="description_uk" name="description_uk" rows="3">{{ category.description_uk }}</textarea>
+                            <div class="form-text">Описание категории на украинском языке.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Немецкая вкладка -->
+                    <div class="tab-pane fade" id="de" role="tabpanel" aria-labelledby="de-tab">
+                        <div class="mb-3">
+                            <label for="name_de" class="form-label">Название (Deutsch)</label>
+                            <input type="text" class="form-control" id="name_de" name="name_de" value="{{ category.name_de }}">
+                            <div class="form-text">Название категории на немецком языке.</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="description_de" class="form-label">Описание (Deutsch)</label>
+                            <textarea class="form-control" id="description_de" name="description_de" rows="3">{{ category.description_de }}</textarea>
+                            <div class="form-text">Описание категории на немецком языке.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Английская вкладка -->
+                    <div class="tab-pane fade" id="en" role="tabpanel" aria-labelledby="en-tab">
+                        <div class="mb-3">
+                            <label for="name_en" class="form-label">Название (English)</label>
+                            <input type="text" class="form-control" id="name_en" name="name_en" value="{{ category.name_en }}">
+                            <div class="form-text">Название категории на английском языке.</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="description_en" class="form-label">Описание (English)</label>
+                            <textarea class="form-control" id="description_en" name="description_en" rows="3">{{ category.description_en }}</textarea>
+                            <div class="form-text">Описание категории на английском языке.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <a href="{{ url_for('admin_panel.categories') }}" class="btn btn-outline-secondary">Отмена</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

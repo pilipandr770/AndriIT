@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Оплата успешна - Программные решения{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body text-center py-5">
+                    <div class="mb-4">
+                        <i class="fas fa-check-circle fa-5x text-success"></i>
+                    </div>
+                    <h1 class="mb-3">Оплата успешно выполнена!</h1>
+                    <p class="lead mb-4">Спасибо за ваш заказ. Номер вашего заказа: <strong>#{{ order.id }}</strong></p>
+                    <p>Мы отправили подтверждение заказа на ваш email: <strong>{{ order.email }}</strong></p>
+                    <p>Вы получите доступ к приобретенным товарам в ближайшее время.</p>
+                    
+                    <div class="mt-5">
+                        <a href="{{ url_for('main.index') }}" class="btn btn-primary me-3">
+                            <i class="fas fa-home me-2"></i>Вернуться на главную
+                        </a>
+                        <a href="{{ url_for('shop.index') }}" class="btn btn-outline-primary">
+                            <i class="fas fa-shopping-cart me-2"></i>Продолжить покупки
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+
+{% block title %}Редактирование товара - Админ-панель{% endblock %}
+
+{% block content %}
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('admin_panel.index') }}">Админ-панель</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('admin_panel.products') }}">Товары</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Редактирование товара</li>
+        </ol>
+    </nav>
+    
+    <h1 class="mb-4">Редактирование товара: {{ product.name }}</h1>
+    
+    <div class="card">
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                <ul class="nav nav-tabs mb-4" id="languageTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button" role="tab" aria-controls="general" aria-selected="true">
+                            Основное
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="uk-tab" data-bs-toggle="tab" data-bs-target="#uk" type="button" role="tab" aria-controls="uk" aria-selected="false">
+                            Українська
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="de-tab" data-bs-toggle="tab" data-bs-target="#de" type="button" role="tab" aria-controls="de" aria-selected="false">
+                            Deutsch
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="en-tab" data-bs-toggle="tab" data-bs-target="#en" type="button" role="tab" aria-controls="en" aria-selected="false">
+                            English
+                        </button>
+                    </li>
+                </ul>
+                
+                <div class="tab-content" id="languageTabsContent">
+                    <!-- Основная вкладка -->
+                    <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Название товара *</label>
+                                    <input type="text" class="form-control" id="name" name="name" value="{{ product.name }}" required>
+                                    <div class="form-text">Основное название товара (используется по умолчанию).</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Описание</label>
+                                    <textarea class="form-control" id="description" name="description" rows="5">{{ product.description }}</textarea>
+                                    <div class="form-text">Основное описание товара (используется по умолчанию).</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="category_id" class="form-label">Категория *</label>
+                                    <select class="form-select" id="category_id" name="category_id" required>
+                                        <option value="">Выберите категорию</option>
+                                        {% for category in categories %}
+                                            <option value="{{ category.id }}" {% if category.id == product.category_id %}selected{% endif %}>{{ category.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="image" class="form-label">Изображение</label>
+                                    {% if product.image %}
+                                        <div class="mb-2">
+                                            <img src="{{ url_for('static', filename=product.image) }}" alt="{{ product.name }}" class="img-thumbnail" style="max-height: 200px;">
+                                        </div>
+                                    {% endif %}
+                                    <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                                    <div class="form-text">Рекомендуемый размер: 800x600 пикселей. Оставьте пустым, чтобы сохранить текущее изображение.</div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="price" class="form-label">Цена *</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="price" name="price" step="0.01" min="0" value="{{ product.price }}" required>
+                                        <span class="input-group-text">€</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="stock" class="form-label">Количество на складе *</label>
+                                    <input type="number" class="form-control" id="stock" name="stock" min="0" value="{{ product.stock }}" required>
+                                </div>
+                                
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="is_active" name="is_active" {% if product.is_active %}checked{% endif %}>
+                                    <label class="form-check-label" for="is_active">Активен</label>
+                                    <div class="form-text">Если отключено, товар не будет отображаться в магазине.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Украинская вкладка -->
+                    <div class="tab-pane fade" id="uk" role="tabpanel" aria-labelledby="uk-tab">
+                        <div class="mb-3">
+                            <label for="name_uk" class="form-label">Название (Українська)</label>
+                            <input type="text" class="form-control" id="name_uk" name="name_uk" value="{{ product.name_uk }}">
+                            <div class="form-text">Название товара на украинском языке.</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="description_uk" class="form-label">Описание (Українська)</label>
+                            <textarea class="form-control" id="description_uk" name="description_uk" rows="5">{{ product.description_uk }}</textarea>
+                            <div class="form-text">Описание товара на украинском языке.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Немецкая вкладка -->
+                    <div class="tab-pane fade" id="de" role="tabpanel" aria-labelledby="de-tab">
+                        <div class="mb-3">
+                            <label for="name_de" class="form-label">Название (Deutsch)</label>
+                            <input type="text" class="form-control" id="name_de" name="name_de" value="{{ product.name_de }}">
+                            <div class="form-text">Название товара на немецком языке.</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="description_de" class="form-label">Описание (Deutsch)</label>
+                            <textarea class="form-control" id="description_de" name="description_de" rows="5">{{ product.description_de }}</textarea>
+                            <div class="form-text">Описание товара на немецком языке.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Английская вкладка -->
+                    <div class="tab-pane fade" id="en" role="tabpanel" aria-labelledby="en-tab">
+                        <div class="mb-3">
+                            <label for="name_en" class="form-label">Название (English)</label>
+                            <input type="text" class="form-control" id="name_en" name="name_en" value="{{ product.name_en }}">
+                            <div class="form-text">Название товара на английском языке.</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="description_en" class="form-label">Описание (English)</label>
+                            <textarea class="form-control" id="description_en" name="description_en" rows="5">{{ product.description_en }}</textarea>
+                            <div class="form-text">Описание товара на английском языке.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <a href="{{ url_for('admin_panel.products') }}" class="btn btn-outline-secondary">Отмена</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Магазин - Программные решения{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Магазин программных решений</h1>
+    
+    <div class="row mb-4">
+        <div class="col-12">
+            <p class="lead">
+                Выберите категорию или просмотрите все наши готовые решения для вашего бизнеса.
+            </p>
+        </div>
+    </div>
+    
+    <div class="row">
+        {% for category in categories %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 product-card">
+                    {% if category.image %}
+                        <img src="{{ url_for('static', filename=category.image) }}" class="card-img-top product-image" alt="{{ category.name }}">
+                    {% else %}
+                        <div class="bg-light text-center py-5">
+                            <i class="fas fa-folder fa-3x text-muted"></i>
+                        </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ category.name }}</h5>
+                        <p class="card-text">{{ category.description|truncate(100) }}</p>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <a href="{{ url_for('shop.category', slug=category.slug) }}" class="btn btn-primary">
+                            Просмотреть товары
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12 text-center py-5">
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    В данный момент категории товаров не добавлены.
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
