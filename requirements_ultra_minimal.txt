@@ -1,0 +1,13 @@
+﻿Flask
+flask-babel
+Flask-Login
+Flask-Migrate
+Flask-SQLAlchemy
+Flask-WTF
+gunicorn
+openai==0.28.1
+psycopg2-binary
+python-dotenv
+python-slugify
+SQLAlchemy
+stripe
