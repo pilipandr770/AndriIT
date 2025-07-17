@@ -1,0 +1,194 @@
+﻿{% extends "base.html" %}
+
+{% block title %}Редактирование статьи блога - Админ-панель{% endblock %}
+
+{% block content %}
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for("main.index") }}">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for("admin_panel.index") }}">Админ-панель</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for("admin_panel.blog_posts") }}">Статьи блога</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Редактирование статьи</li>
+        </ol>
+    </nav>
+    
+    <h1 class="mb-4">Редактирование статьи блога</h1>
+    
+    <div class="card">
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Заголовок</label>
+                    <input type="text" class="form-control" id="title" name="title" value="{{ post.title }}" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="category_id" class="form-label">Категория</label>
+                    <select class="form-select" id="category_id" name="category_id" required>
+                        <option value="">Выберите категорию</option>
+                        {% for category in categories %}
+                            <option value="{{ category.id }}" {% if category.id == post.category_id %}selected{% endif %}>{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="content" class="form-label">Содержание</label>
+                    <textarea class="form-control" id="content" name="content" rows="10" required>{{ post.content }}</textarea>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="image" class="form-label">Изображение</label>
+                    {% if post.image %}
+                        <div class="mb-2">
+                            <img src="{{ url_for("static", filename=post.image) }}" alt="{{ post.title }}" class="img-thumbnail" style="max-height: 200px;">
+                        </div>
+                    {% endif %}
+                    <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                    <small class="text-muted">Загрузите новое изображение, чтобы заменить существующее. Рекомендуемый размер: 1200x630 пикселей</small>
+                </div>
+                
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="is_published" name="is_published" {% if post.is_published %}checked{% endif %}>
+                    <label class="form-check-label" for="is_published">Опубликовать</label>
+                </div>
+                
+                <h4 class="mt-4 mb-3">SEO настройки</h4>
+                
+                <div class="mb-3">
+                    <label for="meta_title" class="form-label">Meta Title</label>
+                    <input type="text" class="form-control" id="meta_title" name="meta_title" value="{{ post.meta_title }}">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="meta_description" class="form-label">Meta Description</label>
+                    <textarea class="form-control" id="meta_description" name="meta_description" rows="2">{{ post.meta_description }}</textarea>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="meta_keywords" class="form-label">Meta Keywords</label>
+                    <input type="text" class="form-control" id="meta_keywords" name="meta_keywords" value="{{ post.meta_keywords }}">
+                </div>
+                
+                <h4 class="mt-4 mb-3">Многоязычность</h4>
+                
+                <ul class="nav nav-tabs mb-3" id="langTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="uk-tab" data-bs-toggle="tab" data-bs-target="#uk" type="button" role="tab" aria-controls="uk" aria-selected="true">
+                            <img src="{{ url_for("static", filename="img/flags/uk.svg") }}" alt="Українська" class="language-flag"> Українська
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="de-tab" data-bs-toggle="tab" data-bs-target="#de" type="button" role="tab" aria-controls="de" aria-selected="false">
+                            <img src="{{ url_for("static", filename="img/flags/de.svg") }}" alt="Deutsch" class="language-flag"> Deutsch
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="en-tab" data-bs-toggle="tab" data-bs-target="#en" type="button" role="tab" aria-controls="en" aria-selected="false">
+                            <img src="{{ url_for("static", filename="img/flags/en.svg") }}" alt="English" class="language-flag"> English
+                        </button>
+                    </li>
+                </ul>
+                
+                <div class="tab-content" id="langTabsContent">
+                    <div class="tab-pane fade show active" id="uk" role="tabpanel" aria-labelledby="uk-tab">
+                        <div class="mb-3">
+                            <label for="title_uk" class="form-label">Заголовок (Українська)</label>
+                            <input type="text" class="form-control" id="title_uk" name="title_uk" value="{{ post.title_uk }}">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="content_uk" class="form-label">Содержание (Українська)</label>
+                            <textarea class="form-control" id="content_uk" name="content_uk" rows="10">{{ post.content_uk }}</textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="meta_title_uk" class="form-label">Meta Title (Українська)</label>
+                            <input type="text" class="form-control" id="meta_title_uk" name="meta_title_uk" value="{{ post.meta_title_uk }}">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="meta_description_uk" class="form-label">Meta Description (Українська)</label>
+                            <textarea class="form-control" id="meta_description_uk" name="meta_description_uk" rows="2">{{ post.meta_description_uk }}</textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="meta_keywords_uk" class="form-label">Meta Keywords (Українська)</label>
+                            <input type="text" class="form-control" id="meta_keywords_uk" name="meta_keywords_uk" value="{{ post.meta_keywords_uk }}">
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="de" role="tabpanel" aria-labelledby="de-tab">
+                        <div class="mb-3">
+                            <label for="title_de" class="form-label">Заголовок (Deutsch)</label>
+                            <input type="text" class="form-control" id="title_de" name="title_de" value="{{ post.title_de }}">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="content_de" class="form-label">Содержание (Deutsch)</label>
+                            <textarea class="form-control" id="content_de" name="content_de" rows="10">{{ post.content_de }}</textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="meta_title_de" class="form-label">Meta Title (Deutsch)</label>
+                            <input type="text" class="form-control" id="meta_title_de" name="meta_title_de" value="{{ post.meta_title_de }}">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="meta_description_de" class="form-label">Meta Description (Deutsch)</label>
+                            <textarea class="form-control" id="meta_description_de" name="meta_description_de" rows="2">{{ post.meta_description_de }}</textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="meta_keywords_de" class="form-label">Meta Keywords (Deutsch)</label>
+                            <input type="text" class="form-control" id="meta_keywords_de" name="meta_keywords_de" value="{{ post.meta_keywords_de }}">
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="en" role="tabpanel" aria-labelledby="en-tab">
+                        <div class="mb-3">
+                            <label for="title_en" class="form-label">Заголовок (English)</label>
+                            <input type="text" class="form-control" id="title_en" name="title_en" value="{{ post.title_en }}">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="content_en" class="form-label">Содержание (English)</label>
+                            <textarea class="form-control" id="content_en" name="content_en" rows="10">{{ post.content_en }}</textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="meta_title_en" class="form-label">Meta Title (English)</label>
+                            <input type="text" class="form-control" id="meta_title_en" name="meta_title_en" value="{{ post.meta_title_en }}">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="meta_description_en" class="form-label">Meta Description (English)</label>
+                            <textarea class="form-control" id="meta_description_en" name="meta_description_en" rows="2">{{ post.meta_description_en }}</textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="meta_keywords_en" class="form-label">Meta Keywords (English)</label>
+                            <input type="text" class="form-control" id="meta_keywords_en" name="meta_keywords_en" value="{{ post.meta_keywords_en }}">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="{{ url_for("admin_panel.blog_posts") }}" class="btn btn-secondary">Отмена</a>
+                    <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Инициализация редактора для текстовых полей
+    document.addEventListener("DOMContentLoaded", function() {
+        // Здесь можно добавить инициализацию WYSIWYG редактора, если нужно
+    });
+</script>
+{% endblock %}

@@ -1,19 +1,13 @@
 ﻿from flask import Blueprint, render_template, redirect, url_for, request, flash, current_app
-from flask_login import login_required, current_user
+from flask_login import login_required
 from app import db
-from app.models.user import User
-from app.models.product import Category, Product
-from app.models.blog import BlogPost, BlogCategory, BlogTopic
-from app.models.order import Order
-from app.models.settings import SocialLink, SiteSettings
+from app.models.blog import BlogPost, BlogCategory
 from app.routes.blog import generate_blog_post
 import os
 from werkzeug.utils import secure_filename
 from slugify import slugify
 import uuid
 from app.routes.admin import admin_bp, admin_required
-
-# Маршруты для управления постами блога
 
 @admin_bp.route("/blog/posts")
 @admin_required
