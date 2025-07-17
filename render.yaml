@@ -3,7 +3,7 @@
   - type: web
     name: flask-shop
     runtime: python
-    buildCommand: pip install -r requirements_minimal.txt
+    buildCommand: pip install -r requirements_ultra_minimal.txt
     startCommand: gunicorn run:app
     envVars:
       - key: PYTHON_VERSION
@@ -33,4 +33,3 @@ databases:
     databaseName: AndriIT
     user: AndriIT
     plan: free
-
