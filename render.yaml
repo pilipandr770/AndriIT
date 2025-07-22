@@ -1,17 +1,21 @@
 ﻿services:
-  # Web service using direct Flask Shop app without SQLAlchemy (compatible with Python 3.13)
+  # Web service using full Flask Shop app from the flask_shop directory
   - type: web
     name: flask-shop
     runtime: python
+    rootDir: flask_shop
     buildCommand: |
       echo "=== PYTHON VERSION CHECK ==="
       python --version
       echo "=== INSTALLING FULL APPLICATION DEPENDENCIES ==="
       pip install --upgrade pip
-      pip install Flask==2.2.5 gunicorn==21.2.0 python-dotenv==1.0.0 Jinja2==3.1.2 Werkzeug==2.2.3
+      # Use SQLAlchemy 1.4 which is more compatible with Python 3.13
+      pip install -r requirements.txt
+      pip uninstall -y sqlalchemy
+      pip install sqlalchemy==1.4.53
       echo "=== INSTALLATION COMPLETE ==="
       pip list
-    startCommand: gunicorn --bind 0.0.0.0:$PORT direct_app:app --workers 1 --timeout 120
+    startCommand: gunicorn --bind 0.0.0.0:$PORT run:app --workers 1 --timeout 300
     envVars:
       - key: SECRET_KEY
         generateValue: true
