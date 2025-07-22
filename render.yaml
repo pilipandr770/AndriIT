@@ -1,9 +1,17 @@
 ﻿services:
-  # Web service using Docker with full Flask Shop application
+  # Web service using direct Flask Shop app without SQLAlchemy (compatible with Python 3.13)
   - type: web
     name: flask-shop
-    runtime: docker
-    dockerfilePath: ./Dockerfile
+    runtime: python
+    buildCommand: |
+      echo "=== PYTHON VERSION CHECK ==="
+      python --version
+      echo "=== INSTALLING MINIMAL DEPENDENCIES ==="
+      pip install --upgrade pip
+      pip install Flask==3.0.0 gunicorn==21.2.0 python-dotenv==1.0.0 Jinja2==3.1.2
+      echo "=== INSTALLATION COMPLETE ==="
+      pip list
+    startCommand: gunicorn --bind 0.0.0.0:$PORT direct_app:app --workers 1 --timeout 120
     envVars:
       - key: SECRET_KEY
         generateValue: true
