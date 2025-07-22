@@ -8,7 +8,7 @@
       python --version
       echo "=== INSTALLING MINIMAL DEPENDENCIES ==="
       pip install --upgrade pip
-      pip install Flask==3.0.0 gunicorn==21.2.0 python-dotenv==1.0.0 Jinja2==3.1.2
+      pip install Flask==3.0.0 gunicorn==21.2.0 python-dotenv==1.0.0 Jinja2==3.1.2 MarkupSafe==2.1.3 itsdangerous==2.1.2 Werkzeug==3.0.0
       echo "=== INSTALLATION COMPLETE ==="
       pip list
     startCommand: gunicorn --bind 0.0.0.0:$PORT direct_app:app --workers 1 --timeout 120
