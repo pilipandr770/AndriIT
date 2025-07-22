@@ -29,4 +29,4 @@ USER app
 EXPOSE 8000
 
 # Команда запуска
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "run_safe:app", "--workers", "2", "--timeout", "300"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "run:app", "--workers", "2", "--timeout", "300"]
