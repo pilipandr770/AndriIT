@@ -4,19 +4,14 @@
     name: flask-shop
     runtime: python
     buildCommand: |
-      echo "=== Python version check ==="
       python --version
-      python3 --version
-      which python
-      which python3
-      echo "=== Installing with legacy SQLAlchemy ==="
       pip install --upgrade pip
-      pip install -r requirements_legacy.txt
-      echo "=== Skipping DB init due to compatibility issues ==="
-    startCommand: gunicorn --bind 0.0.0.0:$PORT run:app --workers 1 --timeout 300 --max-requests 1000
+      pip install -r requirements_minimal_render.txt
+      python init_db.py || echo "DB init failed, continuing..."
+    startCommand: gunicorn --bind 0.0.0.0:$PORT run:app --workers 1 --timeout 120
     envVars:
       - key: PYTHON_VERSION
-        value: 3.10.14
+        value: 3.10.12
       - key: SECRET_KEY
         generateValue: true
       - key: FLASK_DEBUG
