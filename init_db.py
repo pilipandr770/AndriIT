@@ -4,7 +4,6 @@
 """
 import os
 from app import create_app, db
-from sqlalchemy import text
 
 def init_database():
     """Инициализация базы данных"""
@@ -12,13 +11,14 @@ def init_database():
     
     with app.app_context():
         try:
-            # Создаем схему, если нужно (перед созданием таблиц)
+            # Создаем схему, если нужно (для SQLAlchemy 1.4)
             db_schema = os.environ.get('DB_SCHEMA', 'AndriIT')
             if db_schema and db_schema != 'public':
-                with db.engine.connect() as conn:
-                    conn.execute(text(f'CREATE SCHEMA IF NOT EXISTS "{db_schema}"'))
-                    conn.commit()
-                print(f"✅ Схема {db_schema} создана")
+                try:
+                    db.engine.execute(f'CREATE SCHEMA IF NOT EXISTS "{db_schema}"')
+                    print(f"✅ Схема {db_schema} создана")
+                except Exception as schema_error:
+                    print(f"⚠️ Не удалось создать схему: {schema_error}")
             
             # Создаем все таблицы
             db.create_all()

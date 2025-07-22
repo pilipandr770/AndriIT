@@ -4,9 +4,17 @@
     name: flask-shop
     runtime: python
     buildCommand: |
+      echo "=== DEBUG INFO ==="
       python --version
+      pip --version
+      which python
+      echo "=================="
       pip install --upgrade pip
       pip install -r requirements_minimal_render.txt
+      echo "=== PACKAGES INSTALLED ==="
+      pip list | grep -E "(Flask|SQLAlchemy|gunicorn)"
+      echo "=========================="
+      python -c "import sqlalchemy; print('SQLAlchemy version:', sqlalchemy.__version__)" || echo "SQLAlchemy import failed"
       python init_db.py || echo "DB init failed, continuing..."
     startCommand: gunicorn --bind 0.0.0.0:$PORT run:app --workers 1 --timeout 120
     envVars:
