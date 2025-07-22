@@ -8,7 +8,7 @@
       python --version
       echo "=== INSTALLING MINIMAL DEPENDENCIES ==="
       pip install --upgrade pip
-      pip install Flask==2.3.7 gunicorn==21.2.0 python-dotenv==1.0.0
+      pip install -r requirements_render_minimal.txt
       echo "=== INSTALLATION COMPLETE ==="
       pip list
     startCommand: gunicorn --bind 0.0.0.0:$PORT run_minimal:app --workers 1 --timeout 120
