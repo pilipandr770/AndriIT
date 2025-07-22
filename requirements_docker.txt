@@ -1,0 +1,12 @@
+# Точные версии для совместимости с Python 3.13
+Flask==2.2.5
+SQLAlchemy==1.4.41
+Flask-SQLAlchemy==3.0.2
+psycopg2-binary==2.9.5
+gunicorn==20.1.0
+python-dotenv==0.21.0
+Werkzeug==2.2.3
+Jinja2==3.1.2
+MarkupSafe==2.1.2
+itsdangerous==2.1.2
+click==8.1.3
