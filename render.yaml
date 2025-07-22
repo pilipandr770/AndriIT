@@ -3,7 +3,7 @@
   - type: web
     name: flask-shop
     runtime: python
-    buildCommand: pip install --upgrade pip && pip install -r requirements_ultra_minimal.txt && python init_db.py
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt && python init_db.py
     startCommand: gunicorn --bind 0.0.0.0:$PORT run:app --workers 1 --timeout 120
     envVars:
       - key: PYTHON_VERSION
