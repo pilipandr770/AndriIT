@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block title %}Редактирование настройки - Админ-панель{% endblock %}
+
+{% block extra_css %}
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('admin_panel.index') }}">Админ-панель</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('admin_panel.settings') }}">Настройки сайта</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Редактирование настройки</li>
+        </ol>
+    </nav>
+    
+    <h1 class="mb-4">
+        {% if setting.key == 'privacy_policy' %}
+            Редактирование политики конфиденциальности
+        {% elif setting.key == 'terms_conditions' %}
+            Редактирование условий использования
+        {% elif setting.key == 'impressum' %}
+            Редактирование импрессума
+        {% else %}
+            Редактирование настройки: {{ setting.key }}
+        {% endif %}
+    </h1>
+    
+    <div class="card">
+        <div class="card-body">
+            <form method="post">
+                <ul class="nav nav-tabs mb-4" id="languageTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="default-tab" data-bs-toggle="tab" data-bs-target="#default" type="button" role="tab" aria-controls="default" aria-selected="true">
+                            По умолчанию
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="uk-tab" data-bs-toggle="tab" data-bs-target="#uk" type="button" role="tab" aria-controls="uk" aria-selected="false">
+                            Українська
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="de-tab" data-bs-toggle="tab" data-bs-target="#de" type="button" role="tab" aria-controls="de" aria-selected="false">
+                            Deutsch
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="en-tab" data-bs-toggle="tab" data-bs-target="#en" type="button" role="tab" aria-controls="en" aria-selected="false">
+                            English
+                        </button>
+                    </li>
+                </ul>
+                
+                <div class="tab-content" id="languageTabsContent">
+                    <!-- Основная вкладка -->
+                    <div class="tab-pane fade show active" id="default" role="tabpanel" aria-labelledby="default-tab">
+                        <div class="mb-3">
+                            <label for="value" class="form-label">Содержимое (по умолчанию)</label>
+                            <textarea class="form-control summernote" id="value" name="value" rows="10">{{ setting.value }}</textarea>
+                            <div class="form-text">Содержимое страницы, используемое по умолчанию.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Украинская вкладка -->
+                    <div class="tab-pane fade" id="uk" role="tabpanel" aria-labelledby="uk-tab">
+                        <div class="mb-3">
+                            <label for="value_uk" class="form-label">Содержимое (Українська)</label>
+                            <textarea class="form-control summernote" id="value_uk" name="value_uk" rows="10">{{ setting.value_uk }}</textarea>
+                            <div class="form-text">Содержимое страницы на украинском языке.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Немецкая вкладка -->
+                    <div class="tab-pane fade" id="de" role="tabpanel" aria-labelledby="de-tab">
+                        <div class="mb-3">
+                            <label for="value_de" class="form-label">Содержимое (Deutsch)</label>
+                            <textarea class="form-control summernote" id="value_de" name="value_de" rows="10">{{ setting.value_de }}</textarea>
+                            <div class="form-text">Содержимое страницы на немецком языке.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Английская вкладка -->
+                    <div class="tab-pane fade" id="en" role="tabpanel" aria-labelledby="en-tab">
+                        <div class="mb-3">
+                            <label for="value_en" class="form-label">Содержимое (English)</label>
+                            <textarea class="form-control summernote" id="value_en" name="value_en" rows="10">{{ setting.value_en }}</textarea>
+                            <div class="form-text">Содержимое страницы на английском языке.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <a href="{{ url_for('admin_panel.settings') }}" class="btn btn-outline-secondary">Отмена</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Инициализация редактора Summernote
+        $('.summernote').summernote({
+            height: 300,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+        });
+    });
+</script>
+{% endblock %}
+{% endblock %}

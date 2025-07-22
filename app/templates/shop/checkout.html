@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block title %}Оформление заказа - Программные решения{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Оформление заказа</h1>
+    
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Данные для заказа</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{{ url_for('shop.checkout') }}">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Email *</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label">Телефон *</label>
+                                <input type="tel" class="form-control" id="phone" name="phone" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="shipping_address" class="form-label">Адрес доставки *</label>
+                            <textarea class="form-control" id="shipping_address" name="shipping_address" rows="3" required></textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="billing_address" class="form-label">Адрес для выставления счета</label>
+                            <textarea class="form-control" id="billing_address" name="billing_address" rows="3"></textarea>
+                            <div class="form-text">Оставьте пустым, если совпадает с адресом доставки.</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="notes" class="form-label">Примечания к заказу</label>
+                            <textarea class="form-control" id="notes" name="notes" rows="3"></textarea>
+                        </div>
+                        
+                        <h5 class="mt-4 mb-3">Способ оплаты</h5>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="payment_method" id="payment_card" value="card" checked>
+                                    <label class="form-check-label" for="payment_card">
+                                        <i class="fab fa-cc-visa me-2"></i>
+                                        <i class="fab fa-cc-mastercard me-2"></i>
+                                        <i class="fab fa-cc-amex me-2"></i>
+                                        Оплата картой
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
+                            <label class="form-check-label" for="terms">
+                                Я согласен с <a href="{{ url_for('main.terms') }}" target="_blank">условиями использования</a> и <a href="{{ url_for('main.privacy') }}" target="_blank">политикой конфиденциальности</a>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-lock me-2"></i>Оплатить заказ
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <div class="card mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Ваш заказ</h5>
+                </div>
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush">
+                        {% for product in products %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="fw-bold">{{ product.name }}</span>
+                                    <small class="d-block text-muted">{{ product.quantity }} x {{ product.price }} €</small>
+                                </div>
+                                <span>{{ product.total }} €</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="fw-bold">Итого:</span>
+                        <span class="fw-bold">{{ total }} €</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Изменить заказ</h5>
+                    <p class="card-text">Вернуться в корзину, чтобы изменить заказ.</p>
+                    <a href="{{ url_for('shop.cart') }}" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Вернуться в корзину
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Добавление темы для блога - Админ-панель{% endblock %}
+
+{% block content %}
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('admin_panel.index') }}">Админ-панель</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('admin_panel.blog_topics') }}">Темы блога</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Добавление темы</li>
+        </ol>
+    </nav>
+    
+    <h1 class="mb-4">Добавление темы для автогенерации статей</h1>
+    
+    <div class="card">
+        <div class="card-body">
+            <form method="post">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Заголовок темы *</label>
+                    <input type="text" class="form-control" id="title" name="title" required>
+                    <div class="form-text">Заголовок будет использоваться для генерации статьи.</div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="description" class="form-label">Описание темы</label>
+                    <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                    <div class="form-text">Дополнительная информация о теме для более точной генерации контента.</div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="keywords" class="form-label">Ключевые слова</label>
+                    <input type="text" class="form-control" id="keywords" name="keywords">
+                    <div class="form-text">Ключевые слова для SEO-оптимизации, разделенные запятыми.</div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="language" class="form-label">Язык *</label>
+                    <select class="form-select" id="language" name="language" required>
+                        <option value="uk">Українська</option>
+                        <option value="de">Deutsch</option>
+                        <option value="en">English</option>
+                    </select>
+                    <div class="form-text">Язык, на котором будет сгенерирована статья.</div>
+                </div>
+                
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="is_active" name="is_active" checked>
+                    <label class="form-check-label" for="is_active">Активна</label>
+                    <div class="form-text">Если отключено, тема не будет доступна для генерации статей.</div>
+                </div>
+                
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <a href="{{ url_for('admin_panel.blog_topics') }}" class="btn btn-outline-secondary">Отмена</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

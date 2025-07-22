@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ category.name }} - Магазин{% endblock %}
+
+{% block content %}
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('shop.index') }}">Магазин</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ category.name }}</li>
+        </ol>
+    </nav>
+    
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1>{{ category.name }}</h1>
+            <p class="lead">{{ category.description }}</p>
+        </div>
+        {% if category.image %}
+        <div class="col-md-4 text-end">
+            <img src="{{ url_for('static', filename=category.image) }}" alt="{{ category.name }}" class="img-fluid rounded" style="max-height: 200px;">
+        </div>
+        {% endif %}
+    </div>
+    
+    <div class="row">
+        {% for product in products %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 product-card">
+                    {% if product.image %}
+                        <img src="{{ url_for('static', filename=product.image) }}" class="card-img-top product-image" alt="{{ product.name }}">
+                    {% else %}
+                        <div class="bg-light text-center py-5">
+                            <i class="fas fa-box fa-3x text-muted"></i>
+                        </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description|truncate(100) }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-primary fw-bold">{{ product.price }} €</span>
+                            <span class="badge {% if product.stock > 0 %}bg-success{% else %}bg-danger{% endif %}">
+                                {% if product.stock > 0 %}В наличии{% else %}Нет в наличии{% endif %}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <a href="{{ url_for('shop.product', slug=product.slug) }}" class="btn btn-outline-primary">
+                            Подробнее
+                        </a>
+                        {% if product.stock > 0 %}
+                        <form method="post" action="{{ url_for('shop.add_to_cart', product_id=product.id) }}" class="d-inline">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-shopping-cart me-1"></i> В корзину
+                            </button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12 text-center py-5">
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    В данной категории пока нет товаров.
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

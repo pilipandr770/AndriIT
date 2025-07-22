@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block title %}Темы блога - Админ-панель{% endblock %}
+
+{% block content %}
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('admin_panel.index') }}">Админ-панель</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Темы блога</li>
+        </ol>
+    </nav>
+    
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Управление темами блога</h1>
+        <div>
+            <a href="{{ url_for('admin_panel.create_blog_topic') }}" class="btn btn-primary me-2">
+                <i class="fas fa-plus me-2"></i>Добавить тему
+            </a>
+            <a href="{{ url_for('admin_panel.generate_blog') }}" class="btn btn-success">
+                <i class="fas fa-robot me-2"></i>Сгенерировать статью
+            </a>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>ID</th>
+                            <th>Заголовок</th>
+                            <th>Язык</th>
+                            <th>Ключевые слова</th>
+                            <th>Статус</th>
+                            <th>Дата создания</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for topic in topics %}
+                            <tr>
+                                <td>{{ topic.id }}</td>
+                                <td>{{ topic.title }}</td>
+                                <td>
+                                    {% if topic.language == 'uk' %}
+                                        Українська
+                                    {% elif topic.language == 'de' %}
+                                        Deutsch
+                                    {% else %}
+                                        English
+                                    {% endif %}
+                                </td>
+                                <td>{{ topic.keywords }}</td>
+                                <td>
+                                    <span class="badge {% if topic.is_active %}bg-success{% else %}bg-danger{% endif %}">
+                                        {% if topic.is_active %}Активна{% else %}Неактивна{% endif %}
+                                    </span>
+                                </td>
+                                <td>{{ topic.created_at.strftime('%d.%m.%Y') }}</td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <a href="{{ url_for('admin_panel.edit_blog_topic', id=topic.id) }}" class="btn btn-outline-primary">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ topic.id }}">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                    
+                                    <!-- Модальное окно для подтверждения удаления -->
+                                    <div class="modal fade" id="deleteModal{{ topic.id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ topic.id }}" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="deleteModalLabel{{ topic.id }}">Подтверждение удаления</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Вы уверены, что хотите удалить тему "{{ topic.title }}"?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                                                    <form action="{{ url_for('admin_panel.delete_blog_topic', id=topic.id) }}" method="post">
+                                                        <button type="submit" class="btn btn-danger">Удалить</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="7" class="text-center py-4">
+                                    <div class="alert alert-info mb-0">
+                                        <i class="fas fa-info-circle me-2"></i>
+                                        Темы для блога еще не добавлены. <a href="{{ url_for('admin_panel.create_blog_topic') }}">Добавить первую тему</a>.
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

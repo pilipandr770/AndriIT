@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная - Программные решения{% endblock %}
+
+{% block content %}
+<div class="jumbotron bg-light p-5 rounded mb-4">
+    <h1 class="display-4">Программные решения для вашего бизнеса</h1>
+    <p class="lead">Мы предлагаем готовые программные решения и разрабатываем индивидуальные проекты под заказ.</p>
+    <hr class="my-4">
+    <p>Наши решения помогут оптимизировать бизнес-процессы и повысить эффективность вашей компании.</p>
+    <a class="btn btn-primary btn-lg" href="{{ url_for('shop.index') }}">
+        <i class="fas fa-shopping-cart me-2"></i>Перейти в магазин
+    </a>
+</div>
+
+<div class="row mb-5">
+    <div class="col-12">
+        <h2 class="text-center mb-4">Наши услуги</h2>
+    </div>
+</div>
+
+<!-- Блок магазина -->
+<div class="card mb-5">
+    <div class="card-header bg-primary text-white">
+        <h3 class="mb-0">
+            <i class="fas fa-shopping-cart me-2"></i>Магазин готовых решений
+        </h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            {% for category in categories|default([]) %}
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        {% if category.image %}
+                            <img src="{{ url_for('static', filename=category.image) }}" class="card-img-top" alt="{{ category.name }}">
+                        {% else %}
+                            <div class="bg-light text-center py-5">
+                                <i class="fas fa-folder fa-3x text-muted"></i>
+                            </div>
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ category.name }}</h5>
+                            <p class="card-text">{{ category.description|truncate(100) }}</p>
+                            <a href="{{ url_for('shop.category', slug=category.slug) }}" class="btn btn-sm btn-outline-primary">
+                                Подробнее
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <p class="text-center">Категории товаров пока не добавлены.</p>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-3">
+            <a href="{{ url_for('shop.index') }}" class="btn btn-primary">
+                Все категории
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Блок блога -->
+<div class="card mb-5">
+    <div class="card-header bg-info text-white">
+        <h3 class="mb-0">
+            <i class="fas fa-blog me-2"></i>Блог
+        </h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            {% for post in recent_posts|default([]) %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        {% if post.image %}
+                            <img src="{{ url_for('static', filename=post.image) }}" class="card-img-top" alt="{{ post.title }}">
+                        {% else %}
+                            <div class="bg-light text-center py-5">
+                                <i class="fas fa-newspaper fa-3x text-muted"></i>
+                            </div>
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post.title }}</h5>
+                            <p class="card-text">{{ post.content|striptags|truncate(150) }}</p>
+                            <a href="{{ url_for('blog.post', slug=post.slug) }}" class="btn btn-sm btn-outline-info">
+                                Читать далее
+                            </a>
+                        </div>
+                        <div class="card-footer text-muted">
+                            <small>{{ post.created_at.strftime('%d.%m.%Y') }}</small>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <p class="text-center">Статьи блога пока не добавлены.</p>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-3">
+            <a href="{{ url_for('blog.index') }}" class="btn btn-info text-white">
+                Все статьи
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Блок о нас -->
+<div class="card mb-5">
+    <div class="card-header bg-success text-white">
+        <h3 class="mb-0">
+            <i class="fas fa-info-circle me-2"></i>О нас
+        </h3>
+    </div>
+    <div class="card-body">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h4>Почему выбирают нас?</h4>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        Индивидуальный подход к каждому клиенту
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        Высокое качество кода и документации
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        Поддержка и сопровождение после внедрения
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        Опыт работы с различными технологиями и платформами
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        Гибкие условия сотрудничества
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <div class="bg-light p-4 rounded text-center">
+                    <i class="fas fa-laptop-code fa-5x text-success mb-3"></i>
+                    <h4>Свяжитесь с нами</h4>
+                    <p>Мы готовы обсудить ваш проект и предложить оптимальное решение.</p>
+                    <a href="#" class="btn btn-success">
+                        <i class="fas fa-envelope me-2"></i>Написать нам
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

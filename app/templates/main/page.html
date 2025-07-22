@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }} - Программные решения{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">{{ title }}</h1>
+    
+    <div class="card">
+        <div class="card-body">
+            {% if content %}
+                {{ content.value|safe }}
+            {% else %}
+                <p>Содержимое страницы еще не добавлено.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
