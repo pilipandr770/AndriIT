@@ -1,17 +1,19 @@
 ﻿services:
-  # Web service using minimal Python app (no SQLAlchemy)
+  # Web service using full Flask Shop app with SQLAlchemy 1.4 (safer version)
   - type: web
     name: flask-shop
     runtime: python
     buildCommand: |
       echo "=== PYTHON VERSION CHECK ==="
       python --version
-      echo "=== INSTALLING MINIMAL DEPENDENCIES ==="
+      echo "=== INSTALLING FULL APPLICATION DEPENDENCIES ==="
       pip install --upgrade pip
-      pip install -r requirements_render_minimal.txt
+      pip install -r requirements_render_safe.txt
       echo "=== INSTALLATION COMPLETE ==="
       pip list
-    startCommand: gunicorn --bind 0.0.0.0:$PORT run_minimal:app --workers 1 --timeout 120
+      echo "=== INITIALIZING DATABASE ==="
+      python init_db.py || echo "⚠️ Warning: Database initialization failed, continuing deployment"
+    startCommand: gunicorn --bind 0.0.0.0:$PORT run_safe:app --workers 1 --timeout 120
     envVars:
       - key: SECRET_KEY
         generateValue: true
