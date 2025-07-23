@@ -3,11 +3,11 @@
   - type: web
     name: flask-shop
     runtime: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn direct_app:app
+    buildCommand: pip install -r requirements_minimal.txt
+    startCommand: gunicorn minimal_app:app
     envVars:
       - key: PYTHON_VERSION
-        value: 3.13.0
+        value: 3.11.0
       - key: SECRET_KEY
         generateValue: true
       - key: FLASK_DEBUG
