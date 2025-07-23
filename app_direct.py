@@ -9,26 +9,27 @@ import sys
 from datetime import datetime
 
 app = Flask(__name__,
-           template_folder="templates",
-           static_folder="static")
+           template_folder="app/templates",
+           static_folder="app/static")
 
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-key-123')
 
 @app.route('/')
 def index():
-    return render_template('index.html', 
+    return render_template('main/index.html', 
                           title="Flask Shop - Интернет-магазин",
                           year=datetime.now().year)
 
 @app.route('/about')
 def about():
-    return render_template('about.html', 
+    return render_template('main/page.html', 
                           title="О нас - Flask Shop",
+                          content="О нашем магазине Flask Shop",
                           year=datetime.now().year)
 
 @app.route('/contact')
 def contact():
-    return render_template('contact.html',
+    return render_template('main/contact.html',
                           title="Контакты - Flask Shop",
                           year=datetime.now().year)
 
