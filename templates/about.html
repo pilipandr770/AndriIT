@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<h1>О нас</h1>
+<div class="row mt-4">
+    <div class="col-md-8">
+        <p>Flask Shop - это современный интернет-магазин, разработанный с использованием Flask, Python и SQLAlchemy.</p>
+        <p>Наша миссия - предоставить удобную платформу для онлайн-торговли с открытым исходным кодом.</p>
+        <p>Основные особенности:</p>
+        <ul>
+            <li>Гибкая архитектура на основе Flask</li>
+            <li>Многоязычная поддержка</li>
+            <li>Модульная структура</li>
+            <li>Расширяемость с помощью плагинов</li>
+            <li>Безопасность и надежность</li>
+        </ul>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                Контактная информация
+            </div>
+            <div class="card-body">
+                <address>
+                    <strong>Flask Shop Inc.</strong><br>
+                    123 Flask Street<br>
+                    Москва, Россия<br>
+                    <abbr title="Телефон">Тел:</abbr> +7 (495) 123-45-67
+                </address>
+                <address>
+                    <strong>Email</strong><br>
+                    <a href="mailto:info@example.com">info@example.com</a>
+                </address>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

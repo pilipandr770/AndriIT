@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Добро пожаловать в Flask Shop!</h1>
+    <p class="lead">Интернет-магазин с открытым исходным кодом на базе Flask.</p>
+    <hr class="my-4">
+    <p>Это простое демо-приложение для показа возможностей Flask.</p>
+    <a class="btn btn-primary btn-lg" href="/shop" role="button">Перейти в магазин</a>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Простота использования</h5>
+                <p class="card-text">Интуитивно понятный интерфейс и удобная навигация.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Безопасность</h5>
+                <p class="card-text">Защита данных и безопасные платежи.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Поддержка</h5>
+                <p class="card-text">Оперативная техническая поддержка 24/7.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<h1>Контакты</h1>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Наш адрес</h5>
+                <address>
+                    <strong>Flask Shop Inc.</strong><br>
+                    123 Flask Street<br>
+                    Москва, Россия<br>
+                    <abbr title="Телефон">Тел:</abbr> +7 (495) 123-45-67
+                </address>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Свяжитесь с нами</h5>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Имя</label>
+                        <input type="text" class="form-control" id="name" placeholder="Ваше имя">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Ваш email">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="message">Сообщение</label>
+                        <textarea class="form-control" id="message" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Отправить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <h3>Часы работы</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>День</th>
+                    <th>Время</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Понедельник - Пятница</td>
+                    <td>9:00 - 18:00</td>
+                </tr>
+                <tr>
+                    <td>Суббота</td>
+                    <td>10:00 - 16:00</td>
+                </tr>
+                <tr>
+                    <td>Воскресенье</td>
+                    <td>Выходной</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
