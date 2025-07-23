@@ -1,32 +1,30 @@
-# Используем официальный Python образ с фиксированной версией
 FROM python:3.10.12-slim
 
-# Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Устанавливаем системные зависимости
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     gcc \
+    g++ \
     libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Копируем файлы requirements
-COPY requirements_docker.txt .
+# Copy requirements first for better caching
+COPY requirements_render.txt .
 
-# Устанавливаем Python зависимости
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements_docker.txt
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements_render.txt
 
-# Копируем код приложения
+# Copy application code
 COPY . .
 
-# Создаем пользователя для безопасности
-RUN useradd --create-home --shell /bin/bash app && \
-    chown -R app:app /app
-USER app
+# Set environment variables
+ENV FLASK_APP=run.py
+ENV FLASK_ENV=production
+ENV PYTHONPATH=/app
 
-# Открываем порт
-EXPOSE 8000
+# Expose port
+EXPOSE 5000
 
-# Команда запуска
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "run:app", "--workers", "2", "--timeout", "300"]
+# Run the application
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "run:app"]

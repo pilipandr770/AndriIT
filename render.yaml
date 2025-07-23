@@ -1,24 +1,17 @@
 ﻿services:
-  # Web service using standard Flask app with Python 3.12
+  # Web service
   - type: web
     name: flask-shop
     runtime: python
-    buildCommand: |
-      echo "=== PYTHON VERSION CHECK ==="
-      python --version
-      echo "=== INSTALLING DEPENDENCIES ==="
-      pip install --upgrade pip
-      pip install -r requirements.txt
-      echo "=== INSTALLATION COMPLETE ==="
-      pip list
-    startCommand: gunicorn --bind 0.0.0.0:$PORT direct_app:app --workers 1 --timeout 120
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn run:app
     envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.0
       - key: SECRET_KEY
         generateValue: true
       - key: FLASK_DEBUG
         value: 0
-      - key: FLASK_ENV
-        value: production
       - key: DATABASE_URL
         value: postgresql://ittoken_db_user:Xm98VVSZv7cMJkopkdWRkgvZzC7Aly42@dpg-d0visga4d50c73ekmu4g-a.frankfurt-postgres.render.com/ittoken_db
       - key: DB_SCHEMA

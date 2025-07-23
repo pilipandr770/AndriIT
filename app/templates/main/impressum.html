@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ _('Импрессум') }} - {{ _('Программные решения') }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">{{ _('Главная') }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ _('Импрессум') }}</li>
+        </ol>
+    </nav>
+
+    {% if session.language == 'de' %}
+        <!-- Немецкая версия -->
+        <h1>Impressum</h1>
+
+        <h2>Angaben gemäß § 5 TMG</h2>
+
+        <p>[Ihr Name]</p>
+        <p>[Straße, Hausnummer]</p>
+        <p>[Postleitzahl, Stadt]</p>
+        <p>[Land]</p>
+
+        <h2>Kontakt</h2>
+        <p>Telefon: [Ihre Telefonnummer]</p>
+        <p>E-Mail: [Ihre E-Mail-Adresse]</p>
+
+        <h2>Registereintrag</h2>
+        <p>[Registernummer]</p>
+        <p>[Registergericht]</p>
+
+        <h2>Umsatzsteuer-ID</h2>
+        <p>[Ihre Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz]</p>
+
+        <h2>Berufsbezeichnung</h2>
+        <p>Beruf: Softwareentwickler / Freiberufler</p>
+
+        <h2>Haftung für Inhalte</h2>
+        <p>Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
+
+        <h2>Haftung für Links</h2>
+        <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.</p>
+
+        <h2>Urheberrecht</h2>
+        <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p>
+
+    {% elif session.language == 'en' %}
+        <!-- Английская версия -->
+        <h1>Imprint</h1>
+
+        <h2>Information according to § 5 TMG</h2>
+
+        <p>[Your Name]</p>
+        <p>[Street, House Number]</p>
+        <p>[Postal Code, City]</p>
+        <p>[Country]</p>
+
+        <h2>Contact</h2>
+        <p>Phone: [Your Phone Number]</p>
+        <p>Email: [Your Email Address]</p>
+
+        <h2>Registration</h2>
+        <p>[Registration Number]</p>
+        <p>[Registration Court]</p>
+
+        <h2>VAT ID</h2>
+        <p>[Your VAT Identification Number according to § 27 a of the Value Added Tax Act]</p>
+
+        <h2>Professional Information</h2>
+        <p>Profession: Software Developer / Freelancer</p>
+
+        <h2>Liability for Content</h2>
+        <p>As a service provider, we are responsible for our own content on these pages in accordance with general laws. However, we are not obliged to monitor transmitted or stored third-party information or to investigate circumstances that indicate illegal activity.</p>
+
+        <h2>Liability for Links</h2>
+        <p>Our offer contains links to external websites of third parties, the content of which we have no influence on. Therefore, we cannot assume any liability for this third-party content. The respective provider or operator of the pages is always responsible for the content of the linked pages.</p>
+
+        <h2>Copyright</h2>
+        <p>The content and works created by the site operators are subject to German copyright law. Duplication, processing, distribution, and any kind of exploitation outside the limits of copyright require the written consent of the respective author or creator.</p>
+
+    {% else %}
+        <!-- Русская версия (по умолчанию) -->
+        <h1>Импрессум</h1>
+
+        <h2>Информация согласно § 5 TMG</h2>
+
+        <p>[Ваше имя]</p>
+        <p>[Адрес]</p>
+        <p>[Почтовый индекс, Город]</p>
+        <p>[Страна]</p>
+
+        <h2>Контактная информация</h2>
+        <p>Телефон: [Ваш телефон]</p>
+        <p>Email: [Ваш email]</p>
+
+        <h2>Регистрационная информация</h2>
+        <p>[Регистрационный номер компании]</p>
+        <p>[Регистрационный орган]</p>
+
+        <h2>НДС-идентификационный номер</h2>
+        <p>[Ваш НДС-номер согласно § 27 a Закона о налоге на добавленную стоимость]</p>
+
+        <h2>Профессиональная информация</h2>
+        <p>Профессия: Разработчик программного обеспечения / Фрилансер</p>
+
+        <h2>Ответственность за содержание</h2>
+        <p>Как поставщик услуг, мы несем ответственность за собственное содержание на этих страницах в соответствии с общими законами. Однако мы не обязаны контролировать переданную или сохраненную стороннюю информацию или исследовать обстоятельства, указывающие на незаконную деятельность.</p>
+
+        <h2>Ответственность за ссылки</h2>
+        <p>Наше предложение содержит ссылки на внешние веб-сайты третьих лиц, на содержание которых мы не имеем влияния. Поэтому мы не можем нести ответственность за это стороннее содержание. Ответственность за содержание связанных страниц всегда несет соответствующий поставщик или оператор страниц.</p>
+
+        <h2>Авторское право</h2>
+        <p>Содержание и работы, созданные оператором сайта, подпадают под действие немецкого авторского права. Дублирование, обработка, распространение и любой вид использования за пределами границ авторского права требуют письменного согласия соответствующего автора или создателя.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,4 +1,5 @@
 ﻿import os
+import sys
 from flask import Flask, request, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -43,14 +44,17 @@ def create_app(config_class=None):
     from app.routes.blog import blog_bp
     app.register_blueprint(blog_bp, url_prefix="/blog")
     
+    # Импортируем admin_bp
     from app.routes.admin import admin_bp
+    
+    # Импортируем маршруты для блога
+    from app.routes import blog_admin
+    
+    # Регистрируем blueprint
     app.register_blueprint(admin_bp, url_prefix="/admin_panel")
     
     from app.chatbot.routes import chatbot_bp
     app.register_blueprint(chatbot_bp)
-    
-    # Импортируем маршруты для управления постами блога
-    # Импортируем маршруты для управления постами блога\n    import app.routes.admin_blog
     
     # Настройка Babel для многоязычности
     def get_locale():

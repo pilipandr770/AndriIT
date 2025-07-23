@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ _('Контакты') }} - {{ _('Программные решения') }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">{{ _('Главная') }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ _('Контакты') }}</li>
+        </ol>
+    </nav>
+
+    {% if session.language == 'de' %}
+        <!-- Немецкая версия -->
+        <h1>Kontakt</h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Kontaktieren Sie uns</h2>
+                <p>Haben Sie Fragen zu unseren Dienstleistungen oder möchten Sie Ihr Projekt besprechen? Füllen Sie das untenstehende Formular aus, und wir werden uns in Kürze bei Ihnen melden.</p>
+                
+                <form id="contact-form" method="post" action="{{ url_for('main.contact') }}">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Ihr Name *</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="email" class="form-label">E-Mail *</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Telefon</label>
+                        <input type="tel" class="form-control" id="phone" name="phone">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Betreff</label>
+                        <input type="text" class="form-control" id="subject" name="subject">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Nachricht *</label>
+                        <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="privacy" name="privacy" required>
+                        <label class="form-check-label" for="privacy">Ich stimme der <a href="{{ url_for('main.privacy') }}">Datenschutzerklärung</a> zu *</label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Senden</button>
+                </form>
+            </div>
+            
+            <div class="col-md-6">
+                <h2>Kontaktinformationen</h2>
+                <p><strong>Adresse:</strong><br>[Ihre Adresse]</p>
+                <p><strong>E-Mail:</strong><br><a href="mailto:[Ihre E-Mail]">[Ihre E-Mail]</a></p>
+                <p><strong>Telefon:</strong><br>[Ihre Telefonnummer]</p>
+                
+                <h3>Öffnungszeiten</h3>
+                <p>Montag - Freitag: 9:00 - 18:00<br>
+                Samstag - Sonntag: Geschlossen</p>
+                
+                <h3>Soziale Medien</h3>
+                <div class="social-links">
+                    <a href="#" class="me-2"><i class="fab fa-facebook fa-2x"></i></a>
+                    <a href="#" class="me-2"><i class="fab fa-twitter fa-2x"></i></a>
+                    <a href="#" class="me-2"><i class="fab fa-linkedin fa-2x"></i></a>
+                    <a href="#" class="me-2"><i class="fab fa-github fa-2x"></i></a>
+                </div>
+            </div>
+        </div>
+
+    {% elif session.language == 'en' %}
+        <!-- Английская версия -->
+        <h1>Contact</h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Get in Touch</h2>
+                <p>Do you have questions about our services or want to discuss your project? Fill out the form below, and we will get back to you shortly.</p>
+                
+                <form id="contact-form" method="post" action="{{ url_for('main.contact') }}">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Your Name *</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email *</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone</label>
+                        <input type="tel" class="form-control" id="phone" name="phone">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="subject" name="subject">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message *</label>
+                        <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="privacy" name="privacy" required>
+                        <label class="form-check-label" for="privacy">I agree to the <a href="{{ url_for('main.privacy') }}">Privacy Policy</a> *</label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </form>
+            </div>
+            
+            <div class="col-md-6">
+                <h2>Contact Information</h2>
+                <p><strong>Address:</strong><br>[Your Address]</p>
+                <p><strong>Email:</strong><br><a href="mailto:[your email]">[your email]</a></p>
+                <p><strong>Phone:</strong><br>[your phone]</p>
+                
+                <h3>Business Hours</h3>
+                <p>Monday - Friday: 9:00 AM - 6:00 PM<br>
+                Saturday - Sunday: Closed</p>
+                
+                <h3>Social Media</h3>
+                <div class="social-links">
+                    <a href="#" class="me-2"><i class="fab fa-facebook fa-2x"></i></a>
+                    <a href="#" class="me-2"><i class="fab fa-twitter fa-2x"></i></a>
+                    <a href="#" class="me-2"><i class="fab fa-linkedin fa-2x"></i></a>
+                    <a href="#" class="me-2"><i class="fab fa-github fa-2x"></i></a>
+                </div>
+            </div>
+        </div>
+
+    {% else %}
+        <!-- Русская версия (по умолчанию) -->
+        <h1>Контакты</h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Свяжитесь с нами</h2>
+                <p>У вас есть вопросы о наших услугах или вы хотите обсудить ваш проект? Заполните форму ниже, и мы свяжемся с вами в ближайшее время.</p>
+                
+                <form id="contact-form" method="post" action="{{ url_for('main.contact') }}">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Ваше имя *</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email *</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Телефон</label>
+                        <input type="tel" class="form-control" id="phone" name="phone">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Тема</label>
+                        <input type="text" class="form-control" id="subject" name="subject">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Сообщение *</label>
+                        <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="privacy" name="privacy" required>
+                        <label class="form-check-label" for="privacy">Я согласен с <a href="{{ url_for('main.privacy') }}">политикой конфиденциальности</a> *</label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                </form>
+            </div>
+            
+            <div class="col-md-6">
+                <h2>Контактная информация</h2>
+                <p><strong>Адрес:</strong><br>[Ваш адрес]</p>
+                <p><strong>Email:</strong><br><a href="mailto:[ваш email]">[ваш email]</a></p>
+                <p><strong>Телефон:</strong><br>[ваш телефон]</p>
+                
+                <h3>Часы работы</h3>
+                <p>Понедельник - Пятница: 9:00 - 18:00<br>
+                Суббота - Воскресенье: Закрыто</p>
+                
+                <h3>Социальные сети</h3>
+                <div class="social-links">
+                    <a href="#" class="me-2"><i class="fab fa-facebook fa-2x"></i></a>
+                    <a href="#" class="me-2"><i class="fab fa-twitter fa-2x"></i></a>
+                    <a href="#" class="me-2"><i class="fab fa-linkedin fa-2x"></i></a>
+                    <a href="#" class="me-2"><i class="fab fa-github fa-2x"></i></a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

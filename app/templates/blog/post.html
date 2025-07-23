@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ post.title }} - Блог{% endblock %}
+{% block title %}{{ post.title }} - {{ _('Блог') }}{% endblock %}
 
 {% block extra_meta %}
 <meta name="description" content="{{ post.meta_description }}">
@@ -11,8 +11,8 @@
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Главная</a></li>
-            <li class="breadcrumb-item"><a href="{{ url_for('blog.index') }}">Блог</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">{{ _('Главная') }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('blog.index') }}">{{ _('Блог') }}</a></li>
             <li class="breadcrumb-item"><a href="{{ url_for('blog.category', slug=post.category.slug) }}">{{ post.category.name }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ post.title }}</li>
         </ol>
@@ -54,7 +54,7 @@
         <div class="col-lg-4">
             <div class="card mb-4">
                 <div class="card-header bg-light">
-                    <h5 class="mb-0">Категории</h5>
+                    <h5 class="mb-0">{{ _('Категории') }}</h5>
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
@@ -72,7 +72,7 @@
             {% if related_posts %}
                 <div class="card">
                     <div class="card-header bg-light">
-                        <h5 class="mb-0">Похожие статьи</h5>
+                        <h5 class="mb-0">{{ _('Похожие статьи') }}</h5>
                     </div>
                     <div class="card-body">
                         <ul class="list-group list-group-flush">

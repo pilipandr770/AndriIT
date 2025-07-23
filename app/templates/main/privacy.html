@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ _('Политика конфиденциальности') }} - {{ _('Программные решения') }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">{{ _('Главная') }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ _('Политика конфиденциальности') }}</li>
+        </ol>
+    </nav>
+
+    {% if session.language == 'de' %}
+        <!-- Немецкая версия -->
+        <h1>Datenschutzerklärung</h1>
+
+        <p>Letzte Aktualisierung: 22.07.2025</p>
+
+        <h2>1. Einleitung</h2>
+        <p>Wir respektieren Ihre Privatsphäre und sind bestrebt, Ihre persönlichen Daten zu schützen. Diese Datenschutzerklärung erläutert, wie wir mit den Informationen umgehen, die Sie bei der Nutzung unserer Website bereitstellen.</p>
+
+        <h2>2. Welche Daten wir sammeln</h2>
+        <p>Wir sammeln ein Minimum an Daten, die für die Bereitstellung unserer Dienstleistungen erforderlich sind:</p>
+        <ul>
+            <li>Kontaktinformationen, die Sie uns freiwillig über Kontaktformulare zur Verfügung stellen (Name, E-Mail, Telefon).</li>
+            <li>Informationen über Website-Besuche und Servicenutzung (IP-Adresse, Browser-Typ, Zugriffszeit).</li>
+        </ul>
+
+        <h2>3. Wie wir Ihre Daten verwenden</h2>
+        <p>Wir verwenden die gesammelten Daten ausschließlich für:</p>
+        <ul>
+            <li>Die Bereitstellung der von Ihnen angeforderten Dienstleistungen.</li>
+            <li>Die Beantwortung Ihrer Anfragen und Anliegen.</li>
+            <li>Die Verbesserung unserer Website.</li>
+        </ul>
+
+        <h2>4. Weitergabe von Daten an Dritte</h2>
+        <p>Wir verkaufen, tauschen oder übertragen Ihre persönlichen Daten nicht an Dritte, es sei denn, dies ist für die Erbringung von Dienstleistungen erforderlich oder gesetzlich vorgeschrieben.</p>
+
+        <p>Bitte beachten Sie, dass einige Funktionen unserer Website möglicherweise Dienste von Drittanbietern nutzen (Zahlungssysteme, soziale Netzwerke, Messenger), die über eigene Datenschutzrichtlinien verfügen. Wir empfehlen Ihnen, sich mit den Datenschutzrichtlinien dieser Dienste vertraut zu machen.</p>
+
+        <h2>5. Datenspeicherung</h2>
+        <p>Wir speichern Ihre Daten nur so lange, wie es für die Bereitstellung der angeforderten Dienstleistungen erforderlich ist oder wie es gesetzlich vorgeschrieben ist.</p>
+
+        <h2>6. Ihre Rechte</h2>
+        <p>Sie haben das Recht:</p>
+        <ul>
+            <li>Zugang zu Ihren persönlichen Daten anzufordern.</li>
+            <li>Die Berichtigung oder Löschung Ihrer persönlichen Daten zu verlangen.</li>
+            <li>Die Verarbeitung Ihrer persönlichen Daten einzuschränken.</li>
+            <li>Der Verarbeitung Ihrer persönlichen Daten zu widersprechen.</li>
+        </ul>
+
+        <h2>7. Cookies</h2>
+        <p>Unsere Website verwendet Cookies, um die Benutzererfahrung zu verbessern. Sie können die Verwendung von Cookies in Ihren Browsereinstellungen deaktivieren, dies kann jedoch die Funktionalität der Website beeinträchtigen.</p>
+
+        <h2>8. Änderungen der Datenschutzerklärung</h2>
+        <p>Wir können unsere Datenschutzerklärung von Zeit zu Zeit aktualisieren. Alle Änderungen werden auf dieser Seite veröffentlicht.</p>
+
+        <h2>9. Zustimmung</h2>
+        <p>Durch die Nutzung unserer Website stimmen Sie unserer Datenschutzerklärung zu.</p>
+
+        <h2>10. Kontaktinformationen</h2>
+        <p>Wenn Sie Fragen zu unserer Datenschutzerklärung haben, kontaktieren Sie uns bitte über das Kontaktformular auf unserer Website.</p>
+
+    {% elif session.language == 'en' %}
+        <!-- Английская версия -->
+        <h1>Privacy Policy</h1>
+
+        <p>Last updated: July 22, 2025</p>
+
+        <h2>1. Introduction</h2>
+        <p>We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we handle the information you provide when using our website.</p>
+
+        <h2>2. What data we collect</h2>
+        <p>We collect the minimum amount of data necessary to provide our services:</p>
+        <ul>
+            <li>Contact information that you voluntarily provide through our feedback forms (name, email, phone).</li>
+            <li>Information about website visits and service usage (IP address, browser type, access time).</li>
+        </ul>
+
+        <h2>3. How we use your data</h2>
+        <p>We use the collected data exclusively for:</p>
+        <ul>
+            <li>Providing the services you requested.</li>
+            <li>Responding to your inquiries and concerns.</li>
+            <li>Improving our website.</li>
+        </ul>
+
+        <h2>4. Third-party data sharing</h2>
+        <p>We do not sell, trade, or transfer your personal data to third parties, except when necessary to provide services or required by law.</p>
+
+        <p>Please note that some features of our website may use third-party services (payment systems, social networks, messengers) that have their own privacy policies. We recommend that you familiarize yourself with the privacy policies of these services.</p>
+
+        <h2>5. Data storage</h2>
+        <p>We store your data only for the time necessary to provide the requested services or in accordance with legal requirements.</p>
+
+        <h2>6. Your rights</h2>
+        <p>You have the right to:</p>
+        <ul>
+            <li>Request access to your personal data.</li>
+            <li>Request correction or deletion of your personal data.</li>
+            <li>Restrict the processing of your personal data.</li>
+            <li>Object to the processing of your personal data.</li>
+        </ul>
+
+        <h2>7. Cookies</h2>
+        <p>Our website uses cookies to improve the user experience. You can disable the use of cookies in your browser settings, however, this may affect the functionality of the website.</p>
+
+        <h2>8. Changes to the privacy policy</h2>
+        <p>We may update our privacy policy from time to time. All changes will be published on this page.</p>
+
+        <h2>9. Consent</h2>
+        <p>By using our website, you agree to our privacy policy.</p>
+
+        <h2>10. Contact information</h2>
+        <p>If you have any questions regarding our privacy policy, please contact us through the feedback form on our website.</p>
+
+    {% else %}
+        <!-- Русская версия (по умолчанию) -->
+        <h1>Политика конфиденциальности</h1>
+
+        <p>Последнее обновление: 22.07.2025</p>
+
+        <h2>1. Введение</h2>
+        <p>Мы уважаем Вашу конфиденциальность и стремимся защищать Ваши персональные данные. Настоящая политика конфиденциальности объясняет, как мы обрабатываем информацию, которую Вы предоставляете при использовании нашего веб-сайта.</p>
+
+        <h2>2. Какие данные мы собираем</h2>
+        <p>Мы собираем минимальное количество данных, необходимых для предоставления наших услуг:</p>
+        <ul>
+            <li>Контактная информация, которую Вы добровольно предоставляете нам через формы обратной связи (имя, электронная почта, телефон).</li>
+            <li>Информация о посещениях сайта и использовании сервисов (IP-адрес, тип браузера, время доступа).</li>
+        </ul>
+
+        <h2>3. Как мы используем Ваши данные</h2>
+        <p>Мы используем собранные данные исключительно для:</p>
+        <ul>
+            <li>Предоставления запрошенных Вами услуг.</li>
+            <li>Ответа на Ваши запросы и обращения.</li>
+            <li>Улучшения работы нашего сайта.</li>
+        </ul>
+
+        <h2>4. Передача данных третьим лицам</h2>
+        <p>Мы не продаем, не обмениваем и не передаем Ваши персональные данные третьим лицам, за исключением случаев, когда это необходимо для предоставления услуг или требуется по закону.</p>
+
+        <p>Обратите внимание, что некоторые функции нашего сайта могут использовать сторонние сервисы (платежные системы, социальные сети, мессенджеры), которые имеют собственные политики конфиденциальности. Мы рекомендуем ознакомиться с политиками конфиденциальности этих сервисов.</p>
+
+        <h2>5. Хранение данных</h2>
+        <p>Мы храним Ваши данные только в течение времени, необходимого для предоставления запрошенных услуг или в соответствии с требованиями законодательства.</p>
+
+        <h2>6. Ваши права</h2>
+        <p>Вы имеете право:</p>
+        <ul>
+            <li>Запросить доступ к своим персональным данным.</li>
+            <li>Запросить исправление или удаление своих персональных данных.</li>
+            <li>Ограничить обработку своих персональных данных.</li>
+            <li>Возразить против обработки своих персональных данных.</li>
+        </ul>
+
+        <h2>7. Cookies</h2>
+        <p>Наш сайт использует файлы cookies для улучшения пользовательского опыта. Вы можете отключить использование cookies в настройках вашего браузера, однако это может повлиять на функциональность сайта.</p>
+
+        <h2>8. Изменения в политике конфиденциальности</h2>
+        <p>Мы можем обновлять нашу политику конфиденциальности время от времени. Все изменения будут опубликованы на этой странице.</p>
+
+        <h2>9. Согласие</h2>
+        <p>Используя наш сайт, Вы соглашаетесь с нашей политикой конфиденциальности.</p>
+
+        <h2>10. Контактная информация</h2>
+        <p>Если у Вас возникли вопросы относительно нашей политики конфиденциальности, пожалуйста, свяжитесь с нами через форму обратной связи на нашем сайте.</p>
+    {% endif %}
+</div>
+{% endblock %}

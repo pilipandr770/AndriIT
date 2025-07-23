@@ -1,52 +1,29 @@
-# Git
-.git
-.gitignore
-README.md
-
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
+__pycache__
+*.pyc
+*.pyo
+*.pyd
 .Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-
-# Virtual Environment
-new_venv/
-venv/
-env/
-ENV/
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Local files
+env
+pip-log.txt
+pip-delete-this-directory.txt
+.tox
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
 *.log
-.env.local
+.git
+.mypy_cache
+.pytest_cache
+.hypothesis
 
-# Large files
-flask_shop_minimal.zip
+.DS_Store
+.vscode
+.idea
 
-# Documentation
-*.md
+venv/
+new_venv/
+instance/
+.env

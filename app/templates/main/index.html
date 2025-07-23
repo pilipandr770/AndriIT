@@ -1,21 +1,21 @@
 {% extends 'base.html' %}
 
-{% block title %}Главная - Программные решения{% endblock %}
+{% block title %}{{ _('Главная') }} - {{ _('Программные решения') }}{% endblock %}
 
 {% block content %}
 <div class="jumbotron bg-light p-5 rounded mb-4">
-    <h1 class="display-4">Программные решения для вашего бизнеса</h1>
-    <p class="lead">Мы предлагаем готовые программные решения и разрабатываем индивидуальные проекты под заказ.</p>
+    <h1 class="display-4">{{ _('Программные решения для вашего бизнеса') }}</h1>
+    <p class="lead">{{ _('Мы предлагаем готовые программные решения и разрабатываем индивидуальные проекты под заказ.') }}</p>
     <hr class="my-4">
-    <p>Наши решения помогут оптимизировать бизнес-процессы и повысить эффективность вашей компании.</p>
+    <p>{{ _('Наши решения помогут оптимизировать бизнес-процессы и повысить эффективность вашей компании.') }}</p>
     <a class="btn btn-primary btn-lg" href="{{ url_for('shop.index') }}">
-        <i class="fas fa-shopping-cart me-2"></i>Перейти в магазин
+        <i class="fas fa-shopping-cart me-2"></i>{{ _('Перейти в магазин') }}
     </a>
 </div>
 
 <div class="row mb-5">
     <div class="col-12">
-        <h2 class="text-center mb-4">Наши услуги</h2>
+        <h2 class="text-center mb-4">{{ _('Наши услуги') }}</h2>
     </div>
 </div>
 
@@ -23,7 +23,7 @@
 <div class="card mb-5">
     <div class="card-header bg-primary text-white">
         <h3 class="mb-0">
-            <i class="fas fa-shopping-cart me-2"></i>Магазин готовых решений
+            <i class="fas fa-shopping-cart me-2"></i>{{ _('Магазин готовых решений') }}
         </h3>
     </div>
     <div class="card-body">
@@ -42,20 +42,20 @@
                             <h5 class="card-title">{{ category.name }}</h5>
                             <p class="card-text">{{ category.description|truncate(100) }}</p>
                             <a href="{{ url_for('shop.category', slug=category.slug) }}" class="btn btn-sm btn-outline-primary">
-                                Подробнее
+                                {{ _('Подробнее') }}
                             </a>
                         </div>
                     </div>
                 </div>
             {% else %}
                 <div class="col-12">
-                    <p class="text-center">Категории товаров пока не добавлены.</p>
+                    <p class="text-center">{{ _('Категории товаров пока не добавлены.') }}</p>
                 </div>
             {% endfor %}
         </div>
         <div class="text-center mt-3">
             <a href="{{ url_for('shop.index') }}" class="btn btn-primary">
-                Все категории
+                {{ _('Все категории') }}
             </a>
         </div>
     </div>
@@ -65,7 +65,7 @@
 <div class="card mb-5">
     <div class="card-header bg-info text-white">
         <h3 class="mb-0">
-            <i class="fas fa-blog me-2"></i>Блог
+            <i class="fas fa-blog me-2"></i>{{ _('Блог') }}
         </h3>
     </div>
     <div class="card-body">
@@ -84,7 +84,7 @@
                             <h5 class="card-title">{{ post.title }}</h5>
                             <p class="card-text">{{ post.content|striptags|truncate(150) }}</p>
                             <a href="{{ url_for('blog.post', slug=post.slug) }}" class="btn btn-sm btn-outline-info">
-                                Читать далее
+                                {{ _('Читать далее') }}
                             </a>
                         </div>
                         <div class="card-footer text-muted">
@@ -94,13 +94,13 @@
                 </div>
             {% else %}
                 <div class="col-12">
-                    <p class="text-center">Статьи блога пока не добавлены.</p>
+                    <p class="text-center">{{ _('Статьи блога пока не добавлены.') }}</p>
                 </div>
             {% endfor %}
         </div>
         <div class="text-center mt-3">
             <a href="{{ url_for('blog.index') }}" class="btn btn-info text-white">
-                Все статьи
+                {{ _('Все статьи') }}
             </a>
         </div>
     </div>
@@ -110,43 +110,43 @@
 <div class="card mb-5">
     <div class="card-header bg-success text-white">
         <h3 class="mb-0">
-            <i class="fas fa-info-circle me-2"></i>О нас
+            <i class="fas fa-info-circle me-2"></i>{{ _('О нас') }}
         </h3>
     </div>
     <div class="card-body">
         <div class="row align-items-center">
             <div class="col-md-6">
-                <h4>Почему выбирают нас?</h4>
+                <h4>{{ _('Почему выбирают нас?') }}</h4>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
                         <i class="fas fa-check-circle text-success me-2"></i>
-                        Индивидуальный подход к каждому клиенту
+                        {{ _('Индивидуальный подход к каждому клиенту') }}
                     </li>
                     <li class="list-group-item">
                         <i class="fas fa-check-circle text-success me-2"></i>
-                        Высокое качество кода и документации
+                        {{ _('Высокое качество кода и документации') }}
                     </li>
                     <li class="list-group-item">
                         <i class="fas fa-check-circle text-success me-2"></i>
-                        Поддержка и сопровождение после внедрения
+                        {{ _('Поддержка и сопровождение после внедрения') }}
                     </li>
                     <li class="list-group-item">
                         <i class="fas fa-check-circle text-success me-2"></i>
-                        Опыт работы с различными технологиями и платформами
+                        {{ _('Опыт работы с различными технологиями и платформами') }}
                     </li>
                     <li class="list-group-item">
                         <i class="fas fa-check-circle text-success me-2"></i>
-                        Гибкие условия сотрудничества
+                        {{ _('Гибкие условия сотрудничества') }}
                     </li>
                 </ul>
             </div>
             <div class="col-md-6">
                 <div class="bg-light p-4 rounded text-center">
                     <i class="fas fa-laptop-code fa-5x text-success mb-3"></i>
-                    <h4>Свяжитесь с нами</h4>
-                    <p>Мы готовы обсудить ваш проект и предложить оптимальное решение.</p>
+                    <h4>{{ _('Свяжитесь с нами') }}</h4>
+                    <p>{{ _('Мы готовы обсудить ваш проект и предложить оптимальное решение.') }}</p>
                     <a href="#" class="btn btn-success">
-                        <i class="fas fa-envelope me-2"></i>Написать нам
+                        <i class="fas fa-envelope me-2"></i>{{ _('Написать нам') }}
                     </a>
                 </div>
             </div>

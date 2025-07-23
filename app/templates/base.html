@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Программные решения{% endblock %}</title>
+    <title>{% block title %}{{ _('Программные решения') }}{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -14,7 +14,7 @@
     <header class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <a class="navbar-brand" href="{{ url_for('main.index') }}">
-                <i class="fas fa-code me-2"></i>Программные решения
+                <i class="fas fa-code me-2"></i>{{ _('Программные решения') }}
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -23,17 +23,17 @@
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('main.index') }}">
-                            <i class="fas fa-home me-1"></i>Главная
+                            <i class="fas fa-home me-1"></i>{{ _('Главная') }}
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('shop.index') }}">
-                            <i class="fas fa-shopping-cart me-1"></i>Магазин
+                            <i class="fas fa-shopping-cart me-1"></i>{{ _('Магазин') }}
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('blog.index') }}">
-                            <i class="fas fa-blog me-1"></i>Блог
+                            <i class="fas fa-blog me-1"></i>{{ _('Блог') }}
                         </a>
                     </li>
                 </ul>
@@ -66,18 +66,18 @@
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 {% if current_user.is_admin %}
-                                    <li><a class="dropdown-item" href="{{ url_for('admin_panel.index') }}">Админ-панель</a></li>
+                                    <li><a class="dropdown-item" href="{{ url_for('admin_panel.index') }}">{{ _('Админ-панель') }}</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                 {% endif %}
-                                <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">Выйти</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">{{ _('Выйти') }}</a></li>
                             </ul>
                         </div>
                     {% else %}
                         <a href="{{ url_for('auth.login') }}" class="btn btn-sm btn-light me-2">
-                            <i class="fas fa-sign-in-alt me-1"></i>Войти
+                            <i class="fas fa-sign-in-alt me-1"></i>{{ _('Войти') }}
                         </a>
                         <a href="{{ url_for('auth.register') }}" class="btn btn-sm btn-outline-light">
-                            <i class="fas fa-user-plus me-1"></i>Регистрация
+                            <i class="fas fa-user-plus me-1"></i>{{ _('Регистрация') }}
                         </a>
                     {% endif %}
                 </div>
@@ -106,19 +106,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <h5>О нас</h5>
-                    <p>Мы предлагаем готовые программные решения для бизнеса и разрабатываем индивидуальные проекты под заказ.</p>
+                    <h5>{{ _('О нас') }}</h5>
+                    <p>{{ _('Мы предлагаем готовые программные решения для бизнеса и разрабатываем индивидуальные проекты под заказ.') }}</p>
                 </div>
                 <div class="col-md-4">
-                    <h5>Ссылки</h5>
+                    <h5>{{ _('Ссылки') }}</h5>
                     <ul class="list-unstyled">
-                        <li><a href="{{ url_for('main.privacy') }}" class="text-light">Политика конфиденциальности</a></li>
-                        <li><a href="{{ url_for('main.terms') }}" class="text-light">Условия использования</a></li>
-                        <li><a href="{{ url_for('main.impressum') }}" class="text-light">Импрессум</a></li>
+                        <li><a href="{{ url_for('main.privacy') }}" class="text-light">{{ _('Политика конфиденциальности') }}</a></li>
+                        <li><a href="{{ url_for('main.terms') }}" class="text-light">{{ _('Условия использования') }}</a></li>
+                        <li><a href="{{ url_for('main.impressum') }}" class="text-light">{{ _('Импрессум') }}</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    <h5>Социальные сети</h5>
+                    <h5>{{ _('Социальные сети') }}</h5>
                     <div class="social-links">
                         {% for link in social_links|default([]) %}
                             <a href="{{ link.url }}" class="text-light me-2" target="_blank">
@@ -130,7 +130,7 @@
             </div>
             <hr class="my-3">
             <div class="text-center">
-                <p>&copy; {{ now.year }} Программные решения. Все права защищены.</p>
+                <p>&copy; {{ now.year }} {{ _('Программные решения') }}. {{ _('Все права защищены.') }}</p>
             </div>
         </div>
     </footer>
@@ -138,7 +138,7 @@
     <!-- Чат-бот виджет -->
     <div class="chatbot-widget" id="chatbotWidget">
         <div class="chatbot-header" id="chatbotHeader">
-            <i class="fas fa-robot me-2"></i> Чат-бот
+            <i class="fas fa-robot me-2"></i> {{ _('Чат-бот') }}
             <button class="chatbot-toggle" id="chatbotToggle">
                 <i class="fas fa-chevron-up"></i>
             </button>
@@ -146,11 +146,11 @@
         <div class="chatbot-body" id="chatbotBody">
             <div class="chatbot-messages" id="chatbotMessages">
                 <div class="message bot">
-                    <div class="message-content">Здравствуйте! Я ваш виртуальный помощник. Чем могу помочь?</div>
+                    <div class="message-content">{{ _('Здравствуйте! Я ваш виртуальный помощник. Чем могу помочь?') }}</div>
                 </div>
             </div>
             <div class="chatbot-input">
-                <input type="text" id="chatbotInput" placeholder="Введите сообщение...">
+                <input type="text" id="chatbotInput" placeholder="{{ _('Введите сообщение...') }}">
                 <button id="chatbotSend">
                     <i class="fas fa-paper-plane"></i>
                 </button>

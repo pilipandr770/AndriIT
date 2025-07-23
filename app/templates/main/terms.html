@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ _('Условия использования') }} - {{ _('Программные решения') }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">{{ _('Главная') }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ _('Условия использования') }}</li>
+        </ol>
+    </nav>
+
+    {% if session.language == 'de' %}
+        <!-- Немецкая версия -->
+        <h1>Nutzungsbedingungen</h1>
+
+        <p>Letzte Aktualisierung: 22.07.2025</p>
+
+        <h2>1. Akzeptanz der Nutzungsbedingungen</h2>
+        <p>Durch die Nutzung unserer Website erklären Sie sich mit diesen Nutzungsbedingungen einverstanden. Wenn Sie mit diesen Bedingungen nicht einverstanden sind, nutzen Sie bitte unsere Website nicht.</p>
+
+        <h2>2. Änderungen der Nutzungsbedingungen</h2>
+        <p>Wir behalten uns das Recht vor, diese Nutzungsbedingungen jederzeit zu ändern. Die aktualisierte Version wird auf dieser Seite veröffentlicht. Durch die fortgesetzte Nutzung unserer Website nach der Veröffentlichung von Änderungen erklären Sie sich mit den aktualisierten Bedingungen einverstanden.</p>
+
+        <h2>3. Nutzung der Website</h2>
+        <p>Sie verpflichten sich, unsere Website nur für rechtmäßige Zwecke und in einer Weise zu nutzen, die keine Rechte Dritter verletzt oder einschränkt.</p>
+
+        <h2>4. Geistiges Eigentum</h2>
+        <p>Alle Inhalte auf dieser Website, einschließlich, aber nicht beschränkt auf Texte, Grafiken, Logos, Bilder und Software, sind unser Eigentum oder das Eigentum unserer Lizenzgeber und durch Urheberrechte und andere Gesetze zum Schutz geistigen Eigentums geschützt.</p>
+
+        <h2>5. Haftungsausschluss</h2>
+        <p>Die Informationen auf dieser Website werden "wie besehen" ohne jegliche ausdrückliche oder stillschweigende Garantie bereitgestellt. Wir übernehmen keine Garantie für die Richtigkeit, Vollständigkeit oder Aktualität der Informationen.</p>
+
+        <h2>6. Haftungsbeschränkung</h2>
+        <p>In keinem Fall haften wir für direkte, indirekte, zufällige, Folge- oder Strafschäden, die sich aus Ihrer Nutzung oder Unfähigkeit zur Nutzung der Website ergeben.</p>
+
+        <h2>7. Links zu Drittanbieter-Websites</h2>
+        <p>Unsere Website kann Links zu Websites Dritter enthalten. Wir haben keine Kontrolle über den Inhalt und die Praktiken dieser Websites und übernehmen keine Verantwortung für deren Inhalt oder Datenschutzpraktiken.</p>
+
+        <h2>8. Anwendbares Recht</h2>
+        <p>Diese Nutzungsbedingungen unterliegen den Gesetzen Deutschlands und werden in Übereinstimmung mit diesen ausgelegt.</p>
+
+        <h2>9. Kontakt</h2>
+        <p>Bei Fragen zu diesen Nutzungsbedingungen kontaktieren Sie uns bitte über das Kontaktformular auf unserer Website.</p>
+
+    {% elif session.language == 'en' %}
+        <!-- Английская версия -->
+        <h1>Terms of Use</h1>
+
+        <p>Last updated: July 22, 2025</p>
+
+        <h2>1. Acceptance of Terms</h2>
+        <p>By using our website, you agree to these terms of use. If you do not agree to these terms, please do not use our website.</p>
+
+        <h2>2. Changes to Terms</h2>
+        <p>We reserve the right to modify these terms at any time. The updated version will be posted on this page. By continuing to use our website after changes are posted, you agree to the updated terms.</p>
+
+        <h2>3. Use of the Website</h2>
+        <p>You agree to use our website only for lawful purposes and in a manner that does not infringe or restrict anyone else's rights.</p>
+
+        <h2>4. Intellectual Property</h2>
+        <p>All content on this website, including but not limited to text, graphics, logos, images, and software, is our property or the property of our licensors and is protected by copyright and other intellectual property laws.</p>
+
+        <h2>5. Disclaimer</h2>
+        <p>The information on this website is provided "as is" without any express or implied warranty. We make no warranty regarding the accuracy, completeness, or timeliness of the information.</p>
+
+        <h2>6. Limitation of Liability</h2>
+        <p>In no event shall we be liable for any direct, indirect, incidental, consequential, or punitive damages arising out of your use of, or inability to use, the website.</p>
+
+        <h2>7. Links to Third-Party Websites</h2>
+        <p>Our website may contain links to third-party websites. We have no control over the content and practices of these websites and accept no responsibility for their content or privacy practices.</p>
+
+        <h2>8. Governing Law</h2>
+        <p>These terms of use are governed by and construed in accordance with the laws of Germany.</p>
+
+        <h2>9. Contact</h2>
+        <p>If you have any questions about these terms of use, please contact us through the contact form on our website.</p>
+
+    {% else %}
+        <!-- Русская версия (по умолчанию) -->
+        <h1>Условия использования</h1>
+
+        <p>Последнее обновление: 22.07.2025</p>
+
+        <h2>1. Принятие условий</h2>
+        <p>Используя наш веб-сайт, вы соглашаетесь с настоящими условиями использования. Если вы не согласны с этими условиями, пожалуйста, не используйте наш веб-сайт.</p>
+
+        <h2>2. Изменения условий</h2>
+        <p>Мы оставляем за собой право изменять эти условия в любое время. Обновленная версия будет опубликована на этой странице. Продолжая использовать наш веб-сайт после публикации изменений, вы соглашаетесь с обновленными условиями.</p>
+
+        <h2>3. Использование веб-сайта</h2>
+        <p>Вы соглашаетесь использовать наш веб-сайт только в законных целях и таким образом, который не нарушает и не ограничивает права других лиц.</p>
+
+        <h2>4. Интеллектуальная собственность</h2>
+        <p>Весь контент на этом веб-сайте, включая, но не ограничиваясь текстами, графикой, логотипами, изображениями и программным обеспечением, является нашей собственностью или собственностью наших лицензиаров и защищен авторским правом и другими законами об интеллектуальной собственности.</p>
+
+        <h2>5. Отказ от ответственности</h2>
+        <p>Информация на этом веб-сайте предоставляется "как есть" без каких-либо явных или подразумеваемых гарантий. Мы не даем гарантий относительно точности, полноты или своевременности информации.</p>
+
+        <h2>6. Ограничение ответственности</h2>
+        <p>Ни при каких обстоятельствах мы не несем ответственности за любые прямые, косвенные, случайные, последующие или штрафные убытки, возникающие в результате использования или невозможности использования веб-сайта.</p>
+
+        <h2>7. Ссылки на сторонние веб-сайты</h2>
+        <p>Наш веб-сайт может содержать ссылки на сторонние веб-сайты. Мы не контролируем содержание и практики этих веб-сайтов и не несем ответственности за их содержание или политику конфиденциальности.</p>
+
+        <h2>8. Применимое право</h2>
+        <p>Настоящие условия использования регулируются и толкуются в соответствии с законодательством Германии.</p>
+
+        <h2>9. Контакт</h2>
+        <p>Если у вас есть вопросы относительно этих условий использования, пожалуйста, свяжитесь с нами через форму обратной связи на нашем веб-сайте.</p>
+    {% endif %}
+</div>
+{% endblock %}

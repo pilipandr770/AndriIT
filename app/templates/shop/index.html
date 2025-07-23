@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
-{% block title %}Магазин - Программные решения{% endblock %}
+{% block title %}{{ _('Магазин') }} - {{ _('Программные решения') }}{% endblock %}
 
 {% block content %}
 <div class="container">
-    <h1 class="mb-4">Магазин программных решений</h1>
+    <h1 class="mb-4">{{ _('Магазин программных решений') }}</h1>
     
     <div class="row mb-4">
         <div class="col-12">
             <p class="lead">
-                Выберите категорию или просмотрите все наши готовые решения для вашего бизнеса.
+                {{ _('Выберите категорию или просмотрите все наши готовые решения для вашего бизнеса.') }}
             </p>
         </div>
     </div>
@@ -31,7 +31,7 @@
                     </div>
                     <div class="card-footer bg-white border-top-0">
                         <a href="{{ url_for('shop.category', slug=category.slug) }}" class="btn btn-primary">
-                            Просмотреть товары
+                            {{ _('Просмотреть товары') }}
                         </a>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
             <div class="col-12 text-center py-5">
                 <div class="alert alert-info">
                     <i class="fas fa-info-circle me-2"></i>
-                    В данный момент категории товаров не добавлены.
+                    {{ _('В данный момент категории товаров не добавлены.') }}
                 </div>
             </div>
         {% endfor %}
