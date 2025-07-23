@@ -11,6 +11,9 @@ if sys.version_info >= (3, 13):
     # Импортируем патчи для совместимости с Python 3.13
     import python313_patch
     
+    # Отключаем использование greenlet в SQLAlchemy
+    import sqlalchemy_no_greenlet
+    
     # Устанавливаем переменные окружения для совместимости
     os.environ['PYTHONWARNINGS'] = 'ignore::DeprecationWarning'
 

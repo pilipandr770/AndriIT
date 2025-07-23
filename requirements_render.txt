@@ -13,8 +13,10 @@ openai==0.28.1
 psycopg2-binary==2.9.10
 python-dotenv==1.0.0
 python-slugify==8.0.4
+# Используем SQLAlchemy без greenlet
 SQLAlchemy==1.4.50
-greenlet==2.0.2
+# Отключаем greenlet, так как он не совместим с Python 3.13
+# greenlet==2.0.2
 stripe==6.6.0
 Werkzeug==2.3.7
 WTForms==3.0.1
