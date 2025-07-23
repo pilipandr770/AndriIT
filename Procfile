@@ -1,1 +1,1 @@
-﻿web: gunicorn app_direct:app --bind 0.0.0.0:$PORT --workers 1 --timeout 120
+﻿web: gunicorn heroku_app:app --bind 0.0.0.0:$PORT --workers 1 --timeout 120
