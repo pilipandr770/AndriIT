@@ -3,7 +3,10 @@
 echo "Starting Flask app using app.py"
 
 # Проверяем, что Flask-Admin установлен
-pip list | grep Flask-Admin
+pip list | grep Flask-Admin || echo "Flask-Admin not found in pip list"
 
-# Запускаем приложение
-gunicorn --bind 0.0.0.0:$PORT app:app --workers 1 --timeout 120
+# Устанавливаем Flask-Admin явно
+pip install Flask-Admin==1.6.1
+
+# Запускаем приложение с явным указанием переменной application
+gunicorn --bind 0.0.0.0:$PORT app:application --workers 1 --timeout 120

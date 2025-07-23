@@ -24,22 +24,32 @@ if sys.version_info >= (3, 13):
     # Устанавливаем переменные окружения для совместимости
     os.environ['PYTHONWARNINGS'] = 'ignore::DeprecationWarning'
 
+# Применяем патч для flask_admin
+try:
+    import app_init_patch
+    print("Flask-Admin patch applied")
+except ImportError:
+    print("Warning: app_init_patch not found")
+
 # Импортируем Flask-Admin перед импортом приложения
 try:
     import flask_admin
-    print(f"Flask-Admin version: {flask_admin.__version__}")
+    print(f"Flask-Admin version: {getattr(flask_admin, '__version__', 'unknown')}")
 except ImportError:
     print("Warning: flask_admin not found, trying to install it")
     try:
         import subprocess
         subprocess.check_call([sys.executable, "-m", "pip", "install", "Flask-Admin==1.6.1"])
         import flask_admin
-        print(f"Flask-Admin installed and imported: {flask_admin.__version__}")
+        print(f"Flask-Admin installed and imported: {getattr(flask_admin, '__version__', 'unknown')}")
     except Exception as e:
         print(f"Error installing Flask-Admin: {e}")
 
 # Импортируем и создаем приложение
 from run import app
+
+# Экспортируем переменную app для gunicorn
+application = app
 
 if __name__ == '__main__':
     app.run(debug=True)
