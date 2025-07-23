@@ -3,8 +3,8 @@
   - type: web
     name: flask-shop
     runtime: python
-    buildCommand: pip install -r requirements_minimal.txt
-    startCommand: gunicorn minimal_app:app
+    buildCommand: pip install -r requirements_ultra_minimal.txt
+    startCommand: gunicorn ultra_minimal_app:app
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
