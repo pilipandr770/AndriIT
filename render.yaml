@@ -4,7 +4,7 @@
     name: flask-shop
     runtime: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn run:app
+    startCommand: gunicorn direct_app:app
     envVars:
       - key: PYTHON_VERSION
         value: 3.13.0

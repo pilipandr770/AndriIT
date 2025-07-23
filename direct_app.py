@@ -1,121 +1,49 @@
 #!/usr/bin/env python
 """
-Flask Shop Application - Direct Version
-Версия магазина без ORM SQLAlchemy для совместимости с Python 3.13
+Direct Flask application for deployment on Render with Python 3.13
+This file contains all necessary patches and workarounds for Python 3.13 compatibility
 """
-from flask import Flask, render_template, redirect, url_for, flash, session, request, jsonify
-import os
 import sys
-from datetime import datetime
+import os
+import warnings
 
-def create_app():
-    """Create Flask application with routes but without SQLAlchemy"""
-    app = Flask(__name__, 
-                template_folder="app/templates",
-                static_folder="app/static")
+# Apply patches for Python 3.13 compatibility
+if sys.version_info >= (3, 13):
+    print(f"Running on Python {sys.version}")
     
-    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-key-123')
+    # Suppress warnings
+    warnings.filterwarnings('ignore', category=DeprecationWarning)
+    warnings.filterwarnings('ignore', category=UserWarning)
+    os.environ['PYTHONWARNINGS'] = 'ignore::DeprecationWarning'
     
-    # Main routes
-    @app.route('/')
-    def index():
-        return render_template('main/index.html', 
-                              title="Flask Shop - Интернет-магазин",
-                              year=datetime.now().year)
+    # Patch typing.Generic to handle TypingOnly issues
+    import typing
     
-    @app.route('/about')
-    def about():
-        return render_template('main/about.html', 
-                              title="О нас - Flask Shop",
-                              year=datetime.now().year)
+    # Store original method
+    original_init_subclass = typing.Generic.__init_subclass__
     
-    @app.route('/contact')
-    def contact():
-        return render_template('main/contact.html',
-                              title="Контакты - Flask Shop",
-                              year=datetime.now().year)
+    @classmethod
+    def patched_init_subclass(cls, *args, **kwargs):
+        try:
+            return original_init_subclass(*args, **kwargs)
+        except AssertionError as e:
+            error_msg = str(e)
+            if ("directly inherits from TypingOnly" in error_msg or 
+                "напрямую наследует TypingOnly" in error_msg):
+                print(f"Warning: Ignoring TypingOnly assertion for {cls.__name__}")
+                return None
+            raise
     
-    # Shop routes with dummy data
-    @app.route('/shop')
-    def shop():
-        products = [
-            {"id": 1, "name": "Товар 1", "price": 100, "image": "product1.jpg", "description": "Описание товара 1"},
-            {"id": 2, "name": "Товар 2", "price": 200, "image": "product2.jpg", "description": "Описание товара 2"},
-            {"id": 3, "name": "Товар 3", "price": 300, "image": "product3.jpg", "description": "Описание товара 3"}
-        ]
-        return render_template('shop/index.html', 
-                              products=products,
-                              title="Магазин - Flask Shop",
-                              year=datetime.now().year)
-    
-    @app.route('/shop/product/<int:product_id>')
-    def product(product_id):
-        # Dummy product data
-        product = {"id": product_id, "name": f"Товар {product_id}", "price": 100 * product_id, 
-                  "image": f"product{product_id}.jpg", 
-                  "description": f"Подробное описание товара {product_id}"}
-        
-        return render_template('shop/product.html', 
-                              product=product,
-                              title=f"{product['name']} - Flask Shop",
-                              year=datetime.now().year)
-    
-    # Auth routes (simplified)
-    @app.route('/login', methods=['GET', 'POST'])
-    def login():
-        if request.method == 'POST':
-            flash('Вход успешно выполнен', 'success')
-            return redirect(url_for('index'))
-            
-        return render_template('auth/login.html',
-                              title="Вход - Flask Shop",
-                              year=datetime.now().year)
-    
-    @app.route('/register', methods=['GET', 'POST'])
-    def register():
-        if request.method == 'POST':
-            flash('Регистрация успешно завершена', 'success')
-            return redirect(url_for('login'))
-            
-        return render_template('auth/register.html',
-                              title="Регистрация - Flask Shop",
-                              year=datetime.now().year)
-    
-    # API endpoints
-    @app.route('/api/products')
-    def api_products():
-        products = [
-            {"id": 1, "name": "Товар 1", "price": 100},
-            {"id": 2, "name": "Товар 2", "price": 200},
-            {"id": 3, "name": "Товар 3", "price": 300}
-        ]
-        return jsonify(products)
-    
-    @app.route('/api/status')
-    def api_status():
-        return jsonify({
-            'status': 'running',
-            'version': '1.0-direct',
-            'python_version': sys.version,
-            'mode': 'no_database',
-            'env': os.environ.get('FLASK_ENV', 'production')
-        })
-    
-    # Error handlers
-    @app.errorhandler(404)
-    def page_not_found(e):
-        return render_template('main/404.html'), 404
-    
-    @app.errorhandler(500)
-    def server_error(e):
-        return render_template('main/500.html'), 500
-    
-    return app
+    # Apply the patch
+    typing.Generic.__init_subclass__ = patched_init_subclass
+    print("Python 3.13 compatibility patches applied successfully")
 
-# Create the application instance
+# Now import Flask and create the application
+from app import create_app
+
+# Create the Flask application
 app = create_app()
 
+# This allows the app to be imported by gunicorn
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    debug = os.environ.get('FLASK_DEBUG', '0') == '1'
-    app.run(debug=debug, host='0.0.0.0', port=port)
+    app.run(debug=True)
