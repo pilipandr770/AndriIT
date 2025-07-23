@@ -1,0 +1,10 @@
+﻿{
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "env": {
+    "REQUIREMENTS_FILE": "requirements_ultra_minimal.txt"
+  }
+}

@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+﻿{% extends "base.html" %}
 
 {% block title %}Админ-панель - Программные решения{% endblock %}
 
@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="card-footer bg-transparent border-0">
-                    <a href="{{ url_for('admin_panel.products') }}" class="text-white text-decoration-none">
+                    <a href="{{ url_for("admin_panel.products") }}" class="text-white text-decoration-none">
                         Управление товарами <i class="fas fa-arrow-right ms-1"></i>
                     </a>
                 </div>
@@ -76,7 +76,7 @@
                     </div>
                 </div>
                 <div class="card-footer bg-transparent border-0">
-                    <a href="{{ url_for('admin_panel.blog_topics') }}" class="text-white text-decoration-none">
+                    <a href="{{ url_for("admin_panel.blog_posts") }}" class="text-white text-decoration-none">
                         Управление блогом <i class="fas fa-arrow-right ms-1"></i>
                     </a>
                 </div>
@@ -107,13 +107,13 @@
                                     <tr>
                                         <td>#{{ order.id }}</td>
                                         <td>{{ order.email }}</td>
-                                        <td>{{ order.total_amount }} €</td>
+                                        <td>{{ order.total_amount }} </td>
                                         <td>
-                                            <span class="badge {% if order.status == 'paid' %}bg-success{% elif order.status == 'pending' %}bg-warning{% elif order.status == 'cancelled' %}bg-danger{% else %}bg-secondary{% endif %}">
+                                            <span class="badge {% if order.status == "paid" %}bg-success{% elif order.status == "pending" %}bg-warning{% elif order.status == "cancelled" %}bg-danger{% else %}bg-secondary{% endif %}">
                                                 {{ order.status }}
                                             </span>
                                         </td>
-                                        <td>{{ order.created_at.strftime('%d.%m.%Y') }}</td>
+                                        <td>{{ order.created_at.strftime("%d.%m.%Y") }}</td>
                                     </tr>
                                 {% else %}
                                     <tr>
@@ -139,22 +139,25 @@
                 </div>
                 <div class="card-body">
                     <div class="list-group">
-                        <a href="{{ url_for('admin_panel.create_category') }}" class="list-group-item list-group-item-action">
+                        <a href="{{ url_for("admin_panel.create_category") }}" class="list-group-item list-group-item-action">
                             <i class="fas fa-folder-plus me-2"></i>Добавить категорию
                         </a>
-                        <a href="{{ url_for('admin_panel.create_product') }}" class="list-group-item list-group-item-action">
+                        <a href="{{ url_for("admin_panel.create_product") }}" class="list-group-item list-group-item-action">
                             <i class="fas fa-box-open me-2"></i>Добавить товар
                         </a>
-                        <a href="{{ url_for('admin_panel.blog_categories') }}" class="list-group-item list-group-item-action">
+                        <a href="{{ url_for("admin_panel.create_blog_post") }}" class="list-group-item list-group-item-action">
+                            <i class="fas fa-pen me-2"></i>Добавить статью
+                        </a>
+                        <a href="{{ url_for("admin_panel.blog_categories") }}" class="list-group-item list-group-item-action">
                             <i class="fas fa-folder-open me-2"></i>Управление категориями блога
                         </a>
-                        <a href="{{ url_for('admin_panel.create_blog_topic') }}" class="list-group-item list-group-item-action">
+                        <a href="{{ url_for("admin_panel.create_blog_topic") }}" class="list-group-item list-group-item-action">
                             <i class="fas fa-lightbulb me-2"></i>Добавить тему для блога
                         </a>
-                        <a href="{{ url_for('admin_panel.generate_blog') }}" class="list-group-item list-group-item-action">
+                        <a href="{{ url_for("admin_panel.generate_blog") }}" class="list-group-item list-group-item-action">
                             <i class="fas fa-robot me-2"></i>Сгенерировать статью
                         </a>
-                        <a href="{{ url_for('admin_panel.settings') }}" class="list-group-item list-group-item-action">
+                        <a href="{{ url_for("admin_panel.settings") }}" class="list-group-item list-group-item-action">
                             <i class="fas fa-cog me-2"></i>Настройки сайта
                         </a>
                     </div>

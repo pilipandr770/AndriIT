@@ -33,15 +33,29 @@ def set_language(language):
 
 @main_bp.route('/privacy')
 def privacy():
-    privacy_content = SiteSettings.query.filter_by(key='privacy_policy').first()
-    return render_template('main/page.html', title='Политика конфиденциальности', content=privacy_content)
+    return render_template('main/privacy.html')
 
 @main_bp.route('/terms')
 def terms():
-    terms_content = SiteSettings.query.filter_by(key='terms_conditions').first()
-    return render_template('main/page.html', title='Условия использования', content=terms_content)
+    return render_template('main/terms.html')
 
 @main_bp.route('/impressum')
 def impressum():
-    impressum_content = SiteSettings.query.filter_by(key='impressum').first()
-    return render_template('main/page.html', title='Импрессум', content=impressum_content)
+    return render_template('main/impressum.html')
+
+@main_bp.route('/contact', methods=['GET', 'POST'])
+def contact():
+    if request.method == 'POST':
+        # Здесь будет обработка формы контактов
+        name = request.form.get('name')
+        email = request.form.get('email')
+        phone = request.form.get('phone')
+        subject = request.form.get('subject')
+        message = request.form.get('message')
+        
+        # Здесь можно добавить код для отправки email или сохранения сообщения в базе данных
+        
+        # Перенаправляем на страницу с сообщением об успешной отправке
+        return render_template('main/contact_success.html')
+    
+    return render_template('main/contact.html')

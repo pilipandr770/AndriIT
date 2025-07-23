@@ -1,61 +1,49 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash, current_app
-from flask_login import login_required, current_user
+﻿from flask import Blueprint, render_template, redirect, url_for, request, flash, current_app
+from flask_login import login_required
 from app import db
 from app.models.blog import BlogPost, BlogCategory
 import os
 from werkzeug.utils import secure_filename
 from slugify import slugify
 import uuid
+from app.routes.admin import admin_bp, admin_required
 
-blog_admin_bp = Blueprint('blog_admin', __name__)
-
-# Проверка прав администратора
-def admin_required(func):
-    @login_required
-    def decorated_view(*args, **kwargs):
-        if not current_user.is_admin:
-            flash('У вас нет прав для доступа к этой странице.')
-            return redirect(url_for('main.index'))
-        return func(*args, **kwargs)
-    decorated_view.__name__ = func.__name__
-    return decorated_view
-
-@blog_admin_bp.route('/posts')
+@admin_bp.route("/blog/posts")
 @admin_required
-def posts():
+def blog_posts():
     posts = BlogPost.query.order_by(BlogPost.created_at.desc()).all()
-    return render_template('admin/blog/posts.html', posts=posts)
+    return render_template("admin/blog/posts.html", posts=posts)
 
-@blog_admin_bp.route('/posts/create', methods=['GET', 'POST'])
+@admin_bp.route("/blog/posts/create", methods=["GET", "POST"])
 @admin_required
-def create_post():
-    if request.method == 'POST':
-        title = request.form.get('title')
-        content = request.form.get('content')
-        category_id = int(request.form.get('category_id'))
-        is_published = True if request.form.get('is_published') else False
-        
-        # Многоязычные поля
-        title_uk = request.form.get('title_uk')
-        title_de = request.form.get('title_de')
-        title_en = request.form.get('title_en')
-        content_uk = request.form.get('content_uk')
-        content_de = request.form.get('content_de')
-        content_en = request.form.get('content_en')
+def create_blog_post():
+    if request.method == "POST":
+        title = request.form.get("title")
+        content = request.form.get("content")
+        category_id = request.form.get("category_id")
+        is_published = True if request.form.get("is_published") else False
         
         # SEO поля
-        meta_title = request.form.get('meta_title')
-        meta_description = request.form.get('meta_description')
-        meta_keywords = request.form.get('meta_keywords')
-        meta_title_uk = request.form.get('meta_title_uk')
-        meta_title_de = request.form.get('meta_title_de')
-        meta_title_en = request.form.get('meta_title_en')
-        meta_description_uk = request.form.get('meta_description_uk')
-        meta_description_de = request.form.get('meta_description_de')
-        meta_description_en = request.form.get('meta_description_en')
-        meta_keywords_uk = request.form.get('meta_keywords_uk')
-        meta_keywords_de = request.form.get('meta_keywords_de')
-        meta_keywords_en = request.form.get('meta_keywords_en')
+        meta_title = request.form.get("meta_title")
+        meta_description = request.form.get("meta_description")
+        meta_keywords = request.form.get("meta_keywords")
+        
+        # Многоязычные поля
+        title_uk = request.form.get("title_uk")
+        title_de = request.form.get("title_de")
+        title_en = request.form.get("title_en")
+        content_uk = request.form.get("content_uk")
+        content_de = request.form.get("content_de")
+        content_en = request.form.get("content_en")
+        meta_title_uk = request.form.get("meta_title_uk")
+        meta_title_de = request.form.get("meta_title_de")
+        meta_title_en = request.form.get("meta_title_en")
+        meta_description_uk = request.form.get("meta_description_uk")
+        meta_description_de = request.form.get("meta_description_de")
+        meta_description_en = request.form.get("meta_description_en")
+        meta_keywords_uk = request.form.get("meta_keywords_uk")
+        meta_keywords_de = request.form.get("meta_keywords_de")
+        meta_keywords_en = request.form.get("meta_keywords_en")
         
         # Создаем slug из заголовка
         slug = slugify(title)
@@ -66,13 +54,13 @@ def create_post():
         
         # Обработка загруженного изображения
         image = None
-        if 'image' in request.files:
-            file = request.files['image']
+        if "image" in request.files:
+            file = request.files["image"]
             if file and file.filename:
                 filename = secure_filename(file.filename)
                 # Генерируем уникальное имя файла
                 unique_filename = f"{uuid.uuid4().hex}_{filename}"
-                file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], 'blog', unique_filename)
+                file_path = os.path.join(current_app.config["UPLOAD_FOLDER"], "blog", unique_filename)
                 
                 # Создаем директорию, если она не существует
                 os.makedirs(os.path.dirname(file_path), exist_ok=True)
@@ -112,53 +100,53 @@ def create_post():
         db.session.add(post)
         db.session.commit()
         
-        flash('Статья успешно создана.')
-        return redirect(url_for('blog_admin.posts'))
+        flash("Статья успешно создана.")
+        return redirect(url_for("admin_panel.blog_posts"))
     
     categories = BlogCategory.query.all()
-    return render_template('admin/blog/create_post.html', categories=categories)
+    return render_template("admin/blog/create_post.html", categories=categories)
 
-@blog_admin_bp.route('/posts/edit/<int:id>', methods=['GET', 'POST'])
+@admin_bp.route("/blog/posts/edit/<int:id>", methods=["GET", "POST"])
 @admin_required
-def edit_post(id):
+def edit_blog_post(id):
     post = BlogPost.query.get_or_404(id)
     
-    if request.method == 'POST':
-        post.title = request.form.get('title')
-        post.content = request.form.get('content')
-        post.category_id = int(request.form.get('category_id'))
-        post.is_published = True if request.form.get('is_published') else False
-        
-        # Многоязычные поля
-        post.title_uk = request.form.get('title_uk')
-        post.title_de = request.form.get('title_de')
-        post.title_en = request.form.get('title_en')
-        post.content_uk = request.form.get('content_uk')
-        post.content_de = request.form.get('content_de')
-        post.content_en = request.form.get('content_en')
+    if request.method == "POST":
+        post.title = request.form.get("title")
+        post.content = request.form.get("content")
+        post.category_id = request.form.get("category_id")
+        post.is_published = True if request.form.get("is_published") else False
         
         # SEO поля
-        post.meta_title = request.form.get('meta_title')
-        post.meta_description = request.form.get('meta_description')
-        post.meta_keywords = request.form.get('meta_keywords')
-        post.meta_title_uk = request.form.get('meta_title_uk')
-        post.meta_title_de = request.form.get('meta_title_de')
-        post.meta_title_en = request.form.get('meta_title_en')
-        post.meta_description_uk = request.form.get('meta_description_uk')
-        post.meta_description_de = request.form.get('meta_description_de')
-        post.meta_description_en = request.form.get('meta_description_en')
-        post.meta_keywords_uk = request.form.get('meta_keywords_uk')
-        post.meta_keywords_de = request.form.get('meta_keywords_de')
-        post.meta_keywords_en = request.form.get('meta_keywords_en')
+        post.meta_title = request.form.get("meta_title")
+        post.meta_description = request.form.get("meta_description")
+        post.meta_keywords = request.form.get("meta_keywords")
+        
+        # Многоязычные поля
+        post.title_uk = request.form.get("title_uk")
+        post.title_de = request.form.get("title_de")
+        post.title_en = request.form.get("title_en")
+        post.content_uk = request.form.get("content_uk")
+        post.content_de = request.form.get("content_de")
+        post.content_en = request.form.get("content_en")
+        post.meta_title_uk = request.form.get("meta_title_uk")
+        post.meta_title_de = request.form.get("meta_title_de")
+        post.meta_title_en = request.form.get("meta_title_en")
+        post.meta_description_uk = request.form.get("meta_description_uk")
+        post.meta_description_de = request.form.get("meta_description_de")
+        post.meta_description_en = request.form.get("meta_description_en")
+        post.meta_keywords_uk = request.form.get("meta_keywords_uk")
+        post.meta_keywords_de = request.form.get("meta_keywords_de")
+        post.meta_keywords_en = request.form.get("meta_keywords_en")
         
         # Обработка загруженного изображения
-        if 'image' in request.files:
-            file = request.files['image']
+        if "image" in request.files:
+            file = request.files["image"]
             if file and file.filename:
                 filename = secure_filename(file.filename)
                 # Генерируем уникальное имя файла
                 unique_filename = f"{uuid.uuid4().hex}_{filename}"
-                file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], 'blog', unique_filename)
+                file_path = os.path.join(current_app.config["UPLOAD_FOLDER"], "blog", unique_filename)
                 
                 # Создаем директорию, если она не существует
                 os.makedirs(os.path.dirname(file_path), exist_ok=True)
@@ -167,32 +155,32 @@ def edit_post(id):
                 
                 # Удаляем старое изображение, если оно существует
                 if post.image:
-                    old_image_path = os.path.join(current_app.config['UPLOAD_FOLDER'], post.image.replace('uploads/', ''))
+                    old_image_path = os.path.join(current_app.config["UPLOAD_FOLDER"], post.image.replace("uploads/", ""))
                     if os.path.exists(old_image_path):
                         os.remove(old_image_path)
                 
                 post.image = f"uploads/blog/{unique_filename}"
         
         db.session.commit()
-        flash('Статья успешно обновлена.')
-        return redirect(url_for('blog_admin.posts'))
+        flash("Статья успешно обновлена.")
+        return redirect(url_for("admin_panel.blog_posts"))
     
     categories = BlogCategory.query.all()
-    return render_template('admin/blog/edit_post.html', post=post, categories=categories)
+    return render_template("admin/blog/edit_post.html", post=post, categories=categories)
 
-@blog_admin_bp.route('/posts/delete/<int:id>', methods=['POST'])
+@admin_bp.route("/blog/posts/delete/<int:id>", methods=["POST"])
 @admin_required
-def delete_post(id):
+def delete_blog_post(id):
     post = BlogPost.query.get_or_404(id)
     
     # Удаляем изображение, если оно существует
     if post.image:
-        image_path = os.path.join(current_app.config['UPLOAD_FOLDER'], post.image.replace('uploads/', ''))
+        image_path = os.path.join(current_app.config["UPLOAD_FOLDER"], post.image.replace("uploads/", ""))
         if os.path.exists(image_path):
             os.remove(image_path)
     
     db.session.delete(post)
     db.session.commit()
     
-    flash('Статья успешно удалена.')
-    return redirect(url_for('blog_admin.posts'))
+    flash("Статья успешно удалена.")
+    return redirect(url_for("admin_panel.blog_posts"))

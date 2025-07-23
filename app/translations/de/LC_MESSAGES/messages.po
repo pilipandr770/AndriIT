@@ -1,0 +1,324 @@
+# German translations for PROJECT.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-07-22 16:02+0200\n"
+"PO-Revision-Date: 2025-07-22 13:26+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: app/templates/base.html:6 app/templates/base.html:17
+#: app/templates/base.html:133 app/templates/blog/index.html:3
+#: app/templates/main/contact.html:3 app/templates/main/contact_success.html:3
+#: app/templates/main/impressum.html:3 app/templates/main/index.html:3
+#: app/templates/main/privacy.html:3 app/templates/main/terms.html:3
+#: app/templates/shop/index.html:3
+msgid "Программные решения"
+msgstr "Software-Lösungen"
+
+#: app/templates/base.html:26 app/templates/blog/post.html:14
+#: app/templates/main/contact.html:9 app/templates/main/contact_success.html:9
+#: app/templates/main/impressum.html:9 app/templates/main/index.html:3
+#: app/templates/main/privacy.html:9 app/templates/main/terms.html:9
+msgid "Главная"
+msgstr "Startseite"
+
+#: app/templates/base.html:31 app/templates/shop/index.html:3
+msgid "Магазин"
+msgstr "Shop"
+
+#: app/templates/base.html:36 app/templates/blog/index.html:3
+#: app/templates/blog/index.html:7 app/templates/blog/post.html:3
+#: app/templates/blog/post.html:15 app/templates/main/index.html:68
+msgid "Блог"
+msgstr "Blog"
+
+#: app/templates/base.html:69
+msgid "Админ-панель"
+msgstr "Admin-Panel"
+
+#: app/templates/base.html:72
+msgid "Выйти"
+msgstr "Abmelden"
+
+#: app/templates/base.html:77
+msgid "Войти"
+msgstr "Anmelden"
+
+#: app/templates/base.html:80
+msgid "Регистрация"
+msgstr "Registrieren"
+
+#: app/templates/base.html:109 app/templates/main/index.html:113
+msgid "О нас"
+msgstr "Über uns"
+
+#: app/templates/base.html:110
+msgid ""
+"Мы предлагаем готовые программные решения для бизнеса и разрабатываем "
+"индивидуальные проекты под заказ."
+msgstr ""
+"Wir bieten fertige Softwarelösungen für Unternehmen an und entwickeln "
+"individuelle Projekte auf Bestellung."
+
+#: app/templates/base.html:113
+msgid "Ссылки"
+msgstr "Links"
+
+#: app/templates/base.html:115 app/templates/main/privacy.html:3
+#: app/templates/main/privacy.html:10
+msgid "Политика конфиденциальности"
+msgstr "Datenschutzrichtlinie"
+
+#: app/templates/base.html:116 app/templates/main/terms.html:3
+#: app/templates/main/terms.html:10
+msgid "Условия использования"
+msgstr "Nutzungsbedingungen"
+
+#: app/templates/base.html:117 app/templates/main/impressum.html:3
+#: app/templates/main/impressum.html:10
+msgid "Импрессум"
+msgstr "Impressum"
+
+#: app/templates/base.html:121
+msgid "Социальные сети"
+msgstr "Soziale Netzwerke"
+
+#: app/templates/base.html:133
+msgid "Все права защищены."
+msgstr "Alle Rechte vorbehalten."
+
+#: app/templates/base.html:141
+msgid "Чат-бот"
+msgstr "Chatbot"
+
+#: app/templates/base.html:149
+msgid "Здравствуйте! Я ваш виртуальный помощник. Чем могу помочь?"
+msgstr "Hallo! Ich bin Ihr virtueller Assistent. Wie kann ich Ihnen helfen?"
+
+#: app/templates/base.html:153
+msgid "Введите сообщение..."
+msgstr "Nachricht eingeben..."
+
+#: app/templates/blog/index.html:14 app/templates/blog/post.html:57
+msgid "Категории"
+msgstr "Kategorien"
+
+#: app/templates/blog/index.html:25
+msgid "Категории не найдены"
+msgstr "Kategorien nicht gefunden"
+
+#: app/templates/blog/index.html:52 app/templates/main/index.html:87
+msgid "Читать далее"
+msgstr "Weiterlesen"
+
+#: app/templates/blog/index.html:63
+msgid "В блоге пока нет статей."
+msgstr "Es gibt noch keine Artikel im Blog."
+
+#: app/templates/blog/index.html:74 app/templates/blog/index.html:79
+msgid "Предыдущая"
+msgstr "Vorherige"
+
+#: app/templates/blog/index.html:104 app/templates/blog/index.html:109
+msgid "Следующая"
+msgstr "Nächste"
+
+#: app/templates/blog/post.html:75
+msgid "Похожие статьи"
+msgstr "Ähnliche Artikel"
+
+#: app/templates/main/contact.html:3 app/templates/main/contact.html:10
+#: app/templates/main/contact_success.html:10
+msgid "Контакты"
+msgstr "Kontakt"
+
+#: app/templates/main/contact_success.html:3
+#: app/templates/main/contact_success.html:11
+msgid "Сообщение отправлено"
+msgstr "Nachricht gesendet"
+
+#: app/templates/main/index.html:7
+msgid "Программные решения для вашего бизнеса"
+msgstr "Software-Lösungen für Ihr Unternehmen"
+
+#: app/templates/main/index.html:8
+msgid ""
+"Мы предлагаем готовые программные решения и разрабатываем индивидуальные "
+"проекты под заказ."
+msgstr ""
+"Wir bieten fertige Softwarelösungen an und entwickeln individuelle "
+"Projekte nach Maß."
+
+#: app/templates/main/index.html:10
+msgid ""
+"Наши решения помогут оптимизировать бизнес-процессы и повысить "
+"эффективность вашей компании."
+msgstr ""
+"Unsere Lösungen helfen Ihnen, Geschäftsprozesse zu optimieren und die "
+"Effizienz Ihres Unternehmens zu steigern."
+
+#: app/templates/main/index.html:12
+msgid "Перейти в магазин"
+msgstr "Zum Shop gehen"
+
+#: app/templates/main/index.html:18
+msgid "Наши услуги"
+msgstr "Unsere Dienstleistungen"
+
+#: app/templates/main/index.html:26
+msgid "Магазин готовых решений"
+msgstr "Shop für fertige Lösungen"
+
+#: app/templates/main/index.html:45
+msgid "Подробнее"
+msgstr "Mehr erfahren"
+
+#: app/templates/main/index.html:52
+msgid "Категории товаров пока не добавлены."
+msgstr "Produktkategorien wurden noch nicht hinzugefügt."
+
+#: app/templates/main/index.html:58
+msgid "Все категории"
+msgstr "Alle Kategorien"
+
+#: app/templates/main/index.html:97
+msgid "Статьи блога пока не добавлены."
+msgstr "Blog-Artikel wurden noch nicht hinzugefügt."
+
+#: app/templates/main/index.html:103
+msgid "Все статьи"
+msgstr "Alle Artikel"
+
+#: app/templates/main/index.html:119
+msgid "Почему выбирают нас?"
+msgstr "Warum uns wählen?"
+
+#: app/templates/main/index.html:123
+msgid "Индивидуальный подход к каждому клиенту"
+msgstr "Individueller Ansatz für jeden Kunden"
+
+#: app/templates/main/index.html:127
+msgid "Высокое качество кода и документации"
+msgstr "Hohe Qualität von Code und Dokumentation"
+
+#: app/templates/main/index.html:131
+msgid "Поддержка и сопровождение после внедрения"
+msgstr "Support und Betreuung nach der Implementierung"
+
+#: app/templates/main/index.html:135
+msgid "Опыт работы с различными технологиями и платформами"
+msgstr "Erfahrung mit verschiedenen Technologien und Plattformen"
+
+#: app/templates/main/index.html:139
+msgid "Гибкие условия сотрудничества"
+msgstr "Flexible Zusammenarbeitsbedingungen"
+
+#: app/templates/main/index.html:146
+msgid "Свяжитесь с нами"
+msgstr "Kontaktieren Sie uns"
+
+#: app/templates/main/index.html:147
+msgid "Мы готовы обсудить ваш проект и предложить оптимальное решение."
+msgstr ""
+"Wir sind bereit, Ihr Projekt zu besprechen und eine optimale Lösung "
+"anzubieten."
+
+#: app/templates/main/index.html:149
+msgid "Написать нам"
+msgstr "Schreiben Sie uns"
+
+#: app/templates/shop/index.html:7
+msgid "Магазин программных решений"
+msgstr "Software-Lösungen Shop"
+
+#: app/templates/shop/index.html:12
+msgid ""
+"Выберите категорию или просмотрите все наши готовые решения для вашего "
+"бизнеса."
+msgstr ""
+"Wählen Sie eine Kategorie oder durchsuchen Sie alle unsere fertigen "
+"Lösungen für Ihr Unternehmen."
+
+#: app/templates/shop/index.html:34
+msgid "Просмотреть товары"
+msgstr "Produkte anzeigen"
+
+#: app/templates/shop/index.html:43
+msgid "В данный момент категории товаров не добавлены."
+msgstr "Derzeit sind keine Produktkategorien hinzugefügt."
+
+#~ msgid "Программные решения"
+#~ msgstr "Software-Lösungen"
+
+#~ msgid "Главная"
+#~ msgstr "Startseite"
+
+#~ msgid "Магазин"
+#~ msgstr "Shop"
+
+#~ msgid "Блог"
+#~ msgstr "Blog"
+
+#~ msgid "Админ-панель"
+#~ msgstr "Admin-Panel"
+
+#~ msgid "Выйти"
+#~ msgstr "Abmelden"
+
+#~ msgid "Войти"
+#~ msgstr "Anmelden"
+
+#~ msgid "Регистрация"
+#~ msgstr "Registrieren"
+
+#~ msgid "О нас"
+#~ msgstr "Über uns"
+
+#~ msgid ""
+#~ "Мы предлагаем готовые программные решения "
+#~ "для бизнеса и разрабатываем индивидуальные "
+#~ "проекты под заказ."
+#~ msgstr ""
+#~ "Wir bieten fertige Softwarelösungen für "
+#~ "Unternehmen an und entwickeln individuelle "
+#~ "Projekte auf Bestellung."
+
+#~ msgid "Ссылки"
+#~ msgstr "Links"
+
+#~ msgid "Политика конфиденциальности"
+#~ msgstr "Datenschutzrichtlinie"
+
+#~ msgid "Условия использования"
+#~ msgstr "Nutzungsbedingungen"
+
+#~ msgid "Импрессум"
+#~ msgstr "Impressum"
+
+#~ msgid "Социальные сети"
+#~ msgstr "Soziale Netzwerke"
+
+#~ msgid "Все права защищены."
+#~ msgstr "Alle Rechte vorbehalten."
+
+#~ msgid "Чат-бот"
+#~ msgstr "Chatbot"
+
+#~ msgid "Здравствуйте! Я ваш виртуальный помощник. Чем могу помочь?"
+#~ msgstr "Hallo! Ich bin Ihr virtueller Assistent. Wie kann ich Ihnen helfen?"
+
+#~ msgid "Введите сообщение..."
+#~ msgstr "Nachricht eingeben..."
+
