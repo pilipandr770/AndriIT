@@ -8,3 +8,6 @@ export SQLALCHEMY_NO_ASYNC=1
 
 # Устанавливаем зависимости без greenlet
 pip install -r requirements_no_greenlet.txt
+
+# Явно устанавливаем Flask-Admin
+pip install Flask-Admin==1.6.1
