@@ -2,8 +2,12 @@ services:
   - type: web
     name: flask-shop-app
     env: python
-    buildCommand: bash build.sh
-    startCommand: gunicorn app:application --bind 0.0.0.0:$PORT --workers 1 --timeout 120
+    buildCommand: |
+      pip install Flask==2.3.3 gunicorn==21.2.0
+      echo "Installed minimal dependencies"
+    startCommand: |
+      echo "Starting minimal Flask application"
+      gunicorn minimal_app:app --bind 0.0.0.0:$PORT --workers 1 --timeout 120
     envVars:
       - key: PYTHON_VERSION
         value: 3.10.12
