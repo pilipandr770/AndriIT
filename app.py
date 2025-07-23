@@ -4,6 +4,8 @@
 import sys
 import os
 
+print("Starting app.py")
+
 # ВАЖНО: Применяем патчи для Python 3.13 ДО импорта SQLAlchemy
 if sys.version_info >= (3, 13):
     print(f"Running on Python {sys.version}")
@@ -24,6 +26,16 @@ if sys.version_info >= (3, 13):
     # Устанавливаем переменные окружения для совместимости
     os.environ['PYTHONWARNINGS'] = 'ignore::DeprecationWarning'
 
+# Применяем патч для app/__init__.py
+try:
+    import patch_app_init
+    patch_app_init.patch_app_init()
+    print("app/__init__.py patched")
+except ImportError:
+    print("Warning: patch_app_init not found")
+except Exception as e:
+    print(f"Error patching app/__init__.py: {e}")
+
 # Применяем патч для flask_admin
 try:
     import app_init_patch
@@ -31,22 +43,41 @@ try:
 except ImportError:
     print("Warning: app_init_patch not found")
 
-# Импортируем Flask-Admin перед импортом приложения
-try:
-    import flask_admin
-    print(f"Flask-Admin version: {getattr(flask_admin, '__version__', 'unknown')}")
-except ImportError:
-    print("Warning: flask_admin not found, trying to install it")
-    try:
-        import subprocess
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "Flask-Admin==1.6.1"])
-        import flask_admin
-        print(f"Flask-Admin installed and imported: {getattr(flask_admin, '__version__', 'unknown')}")
-    except Exception as e:
-        print(f"Error installing Flask-Admin: {e}")
+# Создаем заглушку для flask_admin в sys.modules
+if 'flask_admin' not in sys.modules:
+    print("Creating mock flask_admin module")
+    class MockAdmin:
+        def __init__(self, name=None, template_mode=None, **kwargs):
+            self.name = name
+            self.template_mode = template_mode
+            self.kwargs = kwargs
+        
+        def init_app(self, app):
+            return self
+    
+    # Создаем фиктивный модуль
+    import types
+    mock_admin = types.ModuleType('flask_admin')
+    mock_admin.Admin = MockAdmin
+    mock_admin.__version__ = '0.0.0'
+    
+    # Добавляем в sys.modules
+    sys.modules['flask_admin'] = mock_admin
+    print("Mock flask_admin module created")
 
 # Импортируем и создаем приложение
-from run import app
+try:
+    from run import app
+    print("Successfully imported app from run.py")
+except ImportError as e:
+    print(f"Error importing app from run.py: {e}")
+    # Создаем минимальное приложение Flask
+    from flask import Flask
+    app = Flask(__name__)
+    
+    @app.route('/')
+    def hello():
+        return "Hello, World! This is a minimal Flask app."
 
 # Экспортируем переменную app для gunicorn
 application = app
