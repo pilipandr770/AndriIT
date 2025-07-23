@@ -5,6 +5,8 @@
     }
   ],
   "env": {
-    "REQUIREMENTS_FILE": "requirements_render.txt"
+    "REQUIREMENTS_FILE": "requirements_no_greenlet.txt",
+    "SQLALCHEMY_WARN_20": "1",
+    "SQLALCHEMY_NO_ASYNC": "1"
   }
 }
