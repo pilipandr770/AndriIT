@@ -3,16 +3,21 @@
 Flask Shop Application
 """
 import sys
+import os
 
-# Apply compatibility patches for Python 3.13 if needed
+# Установка переменных окружения для Python 3.13
 if sys.version_info >= (3, 13):
-    try:
-        from compat_py313 import apply_patches
-        apply_patches()
-        print("Applied compatibility patches for Python 3.13")
-    except ImportError:
-        print("Warning: compat_py313 module not found, compatibility issues may occur with Python 3.13")
+    print(f"Running on Python {sys.version}")
+    
+    # Отключаем предупреждения о устаревших функциях
+    import warnings
+    warnings.filterwarnings('ignore', category=DeprecationWarning)
+    warnings.filterwarnings('ignore', category=UserWarning)
+    
+    # Устанавливаем переменные окружения для совместимости
+    os.environ['PYTHONWARNINGS'] = 'ignore::DeprecationWarning'
 
+# Импортируем и создаем приложение
 from app import create_app
 
 app = create_app()

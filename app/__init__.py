@@ -1,10 +1,42 @@
 ﻿import os
+import sys
 from flask import Flask, request, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_babel import Babel
 from flask_login import LoginManager
 from flask_admin import Admin
+
+# Проверка версии Python и применение патчей при необходимости
+if sys.version_info >= (3, 13):
+    print("Running on Python 3.13+, applying compatibility patches...")
+    try:
+        # Отключаем предупреждения о устаревших функциях
+        import warnings
+        warnings.filterwarnings('ignore', category=DeprecationWarning)
+        warnings.filterwarnings('ignore', category=UserWarning)
+        
+        # Патч для совместимости с SQLAlchemy
+        import typing
+        
+        # Сохраняем оригинальный метод __init_subclass__
+        original_init_subclass = typing.Generic.__init_subclass__
+        
+        # Определяем патченную версию, которая игнорирует определенные атрибуты
+        def patched_init_subclass(cls, *args, **kwargs):
+            try:
+                return original_init_subclass(cls, *args, **kwargs)
+            except AssertionError as e:
+                # Если ошибка связана с TypingOnly и дополнительными атрибутами, игнорируем её
+                if "directly inherits from TypingOnly" in str(e) or "напрямую наследует TypingOnly" in str(e):
+                    return None
+                raise
+        
+        # Применяем патч
+        typing.Generic.__init_subclass__ = patched_init_subclass
+        print("Applied typing compatibility patches for Python 3.13")
+    except Exception as e:
+        print(f"Warning: Could not apply compatibility settings: {e}")
 
 # Инициализация расширений
 db = SQLAlchemy()
