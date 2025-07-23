@@ -1,26 +1,56 @@
 #!/usr/bin/env python
 """
-Flask Shop Application
+Simplified Flask application for deployment on Render.com with Python 3.13
+This version avoids SQLAlchemy dependencies
 """
-import sys
+from flask import Flask, render_template, jsonify
 import os
+import sys
+from datetime import datetime
 
-# ВАЖНО: Применяем патчи для Python 3.13 ДО импорта SQLAlchemy
-if sys.version_info >= (3, 13):
-    print(f"Running on Python {sys.version}")
-    # Импортируем патчи для совместимости с Python 3.13
-    import python313_patch
-    
-    # Отключаем использование greenlet в SQLAlchemy
-    import sqlalchemy_no_greenlet
-    
-    # Устанавливаем переменные окружения для совместимости
-    os.environ['PYTHONWARNINGS'] = 'ignore::DeprecationWarning'
+app = Flask(__name__,
+           template_folder="templates",
+           static_folder="static")
 
-# Импортируем и создаем приложение
-from app import create_app
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-key-123')
 
-app = create_app()
+@app.route('/')
+def index():
+    return render_template('index.html', 
+                          title="Flask Shop - Интернет-магазин",
+                          year=datetime.now().year)
+
+@app.route('/about')
+def about():
+    return render_template('about.html', 
+                          title="О нас - Flask Shop",
+                          year=datetime.now().year)
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html',
+                          title="Контакты - Flask Shop",
+                          year=datetime.now().year)
+
+@app.route('/api/status')
+def api_status():
+    return jsonify({
+        'status': 'running',
+        'version': '1.0-direct',
+        'python_version': sys.version,
+        'mode': 'no_database',
+        'env': os.environ.get('FLASK_ENV', 'production')
+    })
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('main/404.html', title='404 - Page Not Found', year=datetime.now().year), 404
+
+@app.errorhandler(500)
+def server_error(e):
+    return render_template('main/500.html', title='500 - Server Error', year=datetime.now().year), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    debug = os.environ.get('FLASK_DEBUG', '0') == '1'
+    app.run(debug=debug, host='0.0.0.0', port=port)
