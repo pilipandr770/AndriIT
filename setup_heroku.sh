@@ -1,7 +1,9 @@
 #!/bin/bash
-# Script to configure the Heroku environment
-echo "Setting up Flask app on Heroku..."
-echo "Using Python $(python --version)"
 
-# Use the simplified requirements file for Heroku
+# Script to initialize heroku deployment 
+echo "Setting up Flask Shop for Heroku deployment..."
+
+# Copy Heroku-specific requirements to main requirements.txt
 cp requirements_heroku.txt requirements.txt
+
+echo "Heroku initialization complete!"
