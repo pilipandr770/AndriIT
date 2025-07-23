@@ -2,9 +2,9 @@ services:
   # Web service
   - type: web
     name: flask-shop
-    runtime: python
-    buildCommand: bash build.sh
-    startCommand: bash start.sh
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerCommand: gunicorn --bind 0.0.0.0:$PORT run:app --workers 1 --timeout 120
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
