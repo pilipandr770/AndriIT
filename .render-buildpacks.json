@@ -5,6 +5,6 @@
     }
   ],
   "env": {
-    "REQUIREMENTS_FILE": "requirements_ultra_minimal.txt"
+    "REQUIREMENTS_FILE": "requirements_render.txt"
   }
 }
