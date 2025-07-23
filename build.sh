@@ -1,16 +1,12 @@
 #!/bin/bash
-# Explicit build script for Render
-echo "Installing dependencies without greenlet"
+# Simplified build script for Render - no SQLAlchemy
+echo "Installing minimal dependencies for Flask-only deployment"
 
-# Устанавливаем переменные окружения для отключения greenlet в SQLAlchemy
-export SQLALCHEMY_WARN_20=1
-export SQLALCHEMY_NO_ASYNC=1
+# Install only the minimal requirements needed for Flask
+pip install -r requirements_minimal.txt
 
-# Устанавливаем зависимости без greenlet
-pip install -r requirements_no_greenlet.txt
-
-# Явно устанавливаем Flask-Admin
-pip install Flask-Admin==1.6.1
+echo "Python version:"
+python --version
 
 # Запускаем скрипт для установки Flask-Admin
 python install_flask_admin.py

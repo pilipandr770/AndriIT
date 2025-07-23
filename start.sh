@@ -1,18 +1,16 @@
 #!/bin/bash
-# Explicit start script for Render
-echo "Starting Flask app using app.py"
+# Simplified start script for Render.com - No SQLAlchemy
+echo "Starting Flask app using app_direct.py (SQLAlchemy-free version)"
 
-# Проверяем, что Flask-Admin установлен
-pip list | grep Flask-Admin || echo "Flask-Admin not found in pip list"
+# Show Python version
+python --version
 
-# Устанавливаем Flask-Admin явно
-pip install Flask-Admin==1.6.1
+# Show environment variables (excluding secrets)
+echo "PORT: $PORT"
+echo "PYTHONPATH: $PYTHONPATH"
 
-# Копируем app/__init__.py.new в app/__init__.py
-if [ -f app/__init__.py.new ]; then
-  cp -f app/__init__.py app/__init__.py.bak
-  cp -f app/__init__.py.new app/__init__.py
-  echo "Replaced app/__init__.py with app/__init__.py.new"
+# Start the application using gunicorn
+exec gunicorn app_direct:app --bind 0.0.0.0:$PORT --workers 1 --timeout 120
 fi
 
 # Запускаем приложение с явным указанием переменной application

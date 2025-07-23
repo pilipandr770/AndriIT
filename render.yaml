@@ -1,22 +1,15 @@
 services:
-  # Web service
+  # Web service - Pure Python version (no Docker, no SQLAlchemy)
   - type: web
     name: flask-shop
-    # Use Docker runtime instead of Python
-    runtime: docker
-    # No need for buildCommand with Docker
-    # No need for startCommand with Docker - it's specified in the Dockerfile
+    runtime: python
+    buildCommand: pip install -r requirements_minimal.txt
+    startCommand: gunicorn app_direct:app --bind 0.0.0.0:$PORT --workers 1 --timeout 120
     envVars:
       - key: SECRET_KEY
         generateValue: true
       - key: FLASK_DEBUG
         value: 0
-      - key: DATABASE_URL
-        value: postgresql://ittoken_db_user:Xm98VVSZv7cMJkopkdWRkgvZzC7Aly42@dpg-d0visga4d50c73ekmu4g-a.frankfurt-postgres.render.com/ittoken_db
-      - key: DB_SCHEMA
-        value: AndriIT
-      - key: PORT
-        value: 8080
       - key: OPENAI_ASSISTANT_ID
         sync: false
       - key: STRIPE_PUBLIC_KEY
