@@ -16,13 +16,10 @@ COPY . .
 # Use a default port if PORT is not set
 ENV PORT=8080
 
-# Create entrypoint script for proper environment variable handling
-COPY <<EOF /app/entrypoint.sh
-#!/bin/bash
-exec gunicorn --bind 0.0.0.0:${PORT} --workers 1 --threads 8 --timeout 120 run:app
-EOF
-
-RUN chmod +x /app/entrypoint.sh
+# Create entrypoint script separately
+RUN echo '#!/bin/bash' > /app/entrypoint.sh && \
+    echo 'exec gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 8 --timeout 120 run:app' >> /app/entrypoint.sh && \
+    chmod +x /app/entrypoint.sh
 
 # Use JSON format for CMD to properly handle signals
 CMD ["./entrypoint.sh"]

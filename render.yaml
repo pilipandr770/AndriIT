@@ -2,12 +2,11 @@ services:
   # Web service
   - type: web
     name: flask-shop
-    runtime: python
-    buildCommand: bash build.sh
-    startCommand: bash start.sh
+    # Use Docker runtime instead of Python
+    runtime: docker
+    # No need for buildCommand with Docker
+    # No need for startCommand with Docker - it's specified in the Dockerfile
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.0
       - key: SECRET_KEY
         generateValue: true
       - key: FLASK_DEBUG
@@ -16,8 +15,8 @@ services:
         value: postgresql://ittoken_db_user:Xm98VVSZv7cMJkopkdWRkgvZzC7Aly42@dpg-d0visga4d50c73ekmu4g-a.frankfurt-postgres.render.com/ittoken_db
       - key: DB_SCHEMA
         value: AndriIT
-      - key: OPENAI_API_KEY
-        sync: false
+      - key: PORT
+        value: 8080
       - key: OPENAI_ASSISTANT_ID
         sync: false
       - key: STRIPE_PUBLIC_KEY
